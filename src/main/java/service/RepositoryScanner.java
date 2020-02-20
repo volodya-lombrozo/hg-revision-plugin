@@ -11,6 +11,7 @@ import service.exceptions.ChangesetNotFound;
 
 import java.io.File;
 import java.util.List;
+import java.util.Properties;
 import java.util.stream.Collectors;
 
 public class RepositoryScanner {

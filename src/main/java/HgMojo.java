@@ -4,21 +4,24 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.maven.project.MavenProject;
 import service.PropertiesSetter;
 import service.RepositoryScanner;
 
 @Mojo(name = "scan")
 public class HgMojo extends AbstractMojo {
 
-
     @Parameter(defaultValue = "${basedir}", readonly = true)
     private String baseDir;
 
-    private RepositoryScanner scanner = new RepositoryScanner();
-    private PropertiesSetter propertiesSetter = new PropertiesSetter();
+    @Parameter(defaultValue = "${project}")
+    private MavenProject project;
 
-    public void execute() throws MojoExecutionException, MojoFailureException {
+    private RepositoryScanner scanner = new RepositoryScanner();
+
+    public void execute() throws MojoExecutionException {
         try {
+            PropertiesSetter propertiesSetter = new PropertiesSetter(project.getProperties());
             getLog().info("Hg project dir: " + baseDir);
             getLog().info("Start scanning of hg project");
             RepoInfo repositoryInfo = scanner.scan(baseDir);
