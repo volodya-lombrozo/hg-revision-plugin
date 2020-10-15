@@ -4,22 +4,22 @@ import com.aragost.javahg.Bookmark;
 import com.aragost.javahg.Changeset;
 import com.aragost.javahg.Repository;
 import com.aragost.javahg.commands.BookmarksCommand;
-import com.aragost.javahg.commands.LogCommand;
 import domain.RepoInfo;
 import domain.RepoInfoBuilder;
+import service.changeset.ChangesetAdapter;
+import service.changeset.CurrentChangeSet;
 import service.exceptions.ChangesetNotFound;
 
 import java.io.File;
 import java.util.List;
-import java.util.Properties;
 import java.util.stream.Collectors;
 
 public class RepositoryScanner {
 
     public RepoInfo scan(String baseDir) throws ChangesetNotFound {
         Repository repository = Repository.open(new File(baseDir));
-        LogCommand logCommand = LogCommand.on(repository);
-        Changeset changeset = logCommand.execute().stream().findFirst().orElseThrow(ChangesetNotFound::new);
+        ChangesetAdapter adapter = new CurrentChangeSet(repository);
+        Changeset changeset = adapter.toChangeSet();
         List<String> bookmarks = BookmarksCommand.on(repository).list().stream().map(Bookmark::getName).collect(Collectors.toList());
         return new RepoInfoBuilder()
                 .setHgBranch(changeset.getBranch())

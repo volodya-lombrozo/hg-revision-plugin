@@ -6,7 +6,7 @@
 
     <groupId>com.github.volodya-lombrozo</groupId>
     <artifactId>hg-revision-plugin</artifactId>
-    <version>0.2</version>
+    <version>0.3</version>
     <packaging>maven-plugin</packaging>
     <name>${project.groupId}:${project.artifactId}</name>
     <description>Hg revision maven plugin</description>
@@ -72,6 +72,12 @@
             <artifactId>maven-project</artifactId>
             <version>2.2.1</version>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
 
         <!-- dependencies to annotations -->
         <dependency>
@@ -85,6 +91,23 @@
 
     <build>
         <plugins>
+
+            <plugin>
+                <groupId>com.github.volodya-lombrozo</groupId>
+                <artifactId>hg-revision-plugin</artifactId>
+                <version>0.2</version>
+                <executions>
+                    <execution>
+                        <phase>
+                            validate
+                        </phase>
+                        <goals>
+                            <goal>scan</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
             <!--Maven Central requirements-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
