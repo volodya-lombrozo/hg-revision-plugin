@@ -22,7 +22,7 @@
     <developers>
         <developer>
             <name>Volodya Lombrozo</name>
-            <email>volodya.lombrozo@yandex.ru${project.build.directory}</email>
+            <email>volodya.lombrozo@yandex.ru</email>
             <roles>
                 <role>
                     Developer
@@ -95,7 +95,7 @@
             <plugin>
                 <groupId>com.github.volodya-lombrozo</groupId>
                 <artifactId>hg-revision-plugin</artifactId>
-                <version>0.2</version>
+                <version>0.3</version>
                 <executions>
                     <execution>
                         <phase>
