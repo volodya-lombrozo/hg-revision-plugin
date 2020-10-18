@@ -5,6 +5,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import java.time.DayOfWeek;
+import java.time.Period;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -59,9 +61,7 @@ public class TagsTest {
     public void testToString() {
         Tags tags = new Tags(expectedTags);
         String expected = String.join(";", expectedTags);
-
         String actual = tags.toString();
-
         assertEquals(expected, actual);
     }
 }
