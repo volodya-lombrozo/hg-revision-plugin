@@ -25,7 +25,7 @@ public class NodeTest {
     @Test
     public void fillProperties() {
         Properties properties = new Properties();
-        Recordable node = new Node(changeset);
+        RecordableProperty node = new Node(changeset);
 
         node.fillProperties(properties);
 
@@ -36,7 +36,7 @@ public class NodeTest {
 
     @Test
     public void testToString() {
-        Recordable node = new Node(changeset);
+        RecordableProperty node = new Node(changeset);
 
         String actual = node.toString();
 

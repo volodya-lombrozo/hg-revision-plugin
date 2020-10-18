@@ -4,7 +4,7 @@ import com.aragost.javahg.Changeset;
 
 import java.util.Properties;
 
-public class Author implements Recordable {
+public class Author implements RecordableProperty {
 
     private final Changeset changeset;
 

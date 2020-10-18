@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Properties;
 import java.util.stream.Collectors;
 
-public class Bookmarks implements Recordable {
+public class Bookmarks implements RecordableProperty {
 
     private final Repository repository;
 

@@ -2,9 +2,6 @@ package service.changeset;
 
 import com.aragost.javahg.Changeset;
 import com.aragost.javahg.Repository;
-import domain.Bookmarks;
-import domain.RepoInfo;
-import service.exceptions.ChangesetNotFound;
 
 public class CurrentChangeSet implements ChangesetAdapter {
 
@@ -15,11 +12,9 @@ public class CurrentChangeSet implements ChangesetAdapter {
     }
 
     @Override
-    public Changeset toChangeSet() throws ChangesetNotFound {
+    public Changeset toChangeSet() {
         return repository.workingCopy().getParent1();
     }
 
-    public RepoInfo toRepoInfo() throws ChangesetNotFound {
-        return new RepoInfo(toChangeSet(), new Bookmarks(repository).toString());
-    }
+
 }

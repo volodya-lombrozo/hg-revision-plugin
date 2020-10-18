@@ -8,7 +8,7 @@ import java.util.Properties;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class Tags implements Recordable {
+public class Tags implements RecordableProperty {
 
     private final Collection<String> tags;
 

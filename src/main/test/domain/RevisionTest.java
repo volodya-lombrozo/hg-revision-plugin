@@ -25,7 +25,7 @@ public class RevisionTest {
     @Test
     public void fillProperties() {
         Properties properties = new Properties();
-        Recordable revision = new Revision(changeset);
+        RecordableProperty revision = new Revision(changeset);
 
         revision.fillProperties(properties);
 
@@ -36,7 +36,7 @@ public class RevisionTest {
 
     @Test
     public void testToString() {
-        Recordable revision = new Revision(changeset);
+        RecordableProperty revision = new Revision(changeset);
 
         String actual = revision.toString();
 

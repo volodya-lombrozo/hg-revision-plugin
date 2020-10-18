@@ -1,12 +1,11 @@
-import domain.RepoInfo;
+import domain.RepositoryInfo;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
-import service.PropertiesSetter;
-import service.RepositoryScanner;
+import service.RepositorySteward;
+
 
 @Mojo(name = "scan")
 public class HgMojo extends AbstractMojo {
@@ -17,16 +16,15 @@ public class HgMojo extends AbstractMojo {
     @Parameter(defaultValue = "${project}")
     private MavenProject project;
 
-    private RepositoryScanner scanner = new RepositoryScanner();
+    private RepositorySteward scanner = new RepositorySteward(baseDir);
 
     public void execute() throws MojoExecutionException {
         try {
-            PropertiesSetter propertiesSetter = new PropertiesSetter(project.getProperties());
             getLog().info("Hg project dir: " + baseDir);
             getLog().info("Start scanning of hg project");
-            RepoInfo repositoryInfo = scanner.scan(baseDir);
+            RepositoryInfo info = new RepositoryInfo(scanner.openRepository());
             getLog().info("Starting setting properties...");
-            propertiesSetter.setProperties(repositoryInfo);
+            info.fillProperties(project.getProperties());
             getLog().info("Scanning is done!");
         } catch (Exception e) {
             throw new MojoExecutionException(e.getMessage(), e);

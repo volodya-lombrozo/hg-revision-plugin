@@ -4,7 +4,7 @@ import com.aragost.javahg.Changeset;
 
 import java.util.Properties;
 
-public class Revision implements Recordable {
+public class Revision implements RecordableProperty {
 
     private final Changeset changeset;
 

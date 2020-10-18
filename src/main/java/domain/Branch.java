@@ -4,7 +4,7 @@ import com.aragost.javahg.Changeset;
 
 import java.util.Properties;
 
-public class Branch implements Recordable {
+public class Branch implements RecordableProperty {
 
     private final Changeset changeset;
 

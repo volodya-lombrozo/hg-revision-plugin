@@ -25,7 +25,7 @@ public class DescriptionTest {
     @Test
     public void fillProperties() {
         Properties properties = new Properties();
-        Recordable description = new Description(changeset);
+        RecordableProperty description = new Description(changeset);
 
         description.fillProperties(properties);
 
@@ -36,7 +36,7 @@ public class DescriptionTest {
 
     @Test
     public void testToString() {
-        Recordable description = new Description(changeset);
+        RecordableProperty description = new Description(changeset);
 
         String actual = description.toString();
 

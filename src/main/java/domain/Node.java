@@ -4,7 +4,7 @@ import com.aragost.javahg.Changeset;
 
 import java.util.Properties;
 
-public class Node implements Recordable {
+public class Node implements RecordableProperty {
 
     private final Changeset changeset;
 
