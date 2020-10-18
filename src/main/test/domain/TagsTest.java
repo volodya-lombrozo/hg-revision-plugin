@@ -36,9 +36,11 @@ public class TagsTest {
         assertTrue(properties.containsKey("hg.tags"));
         assertTrue(properties.containsKey("hg.tags[0]"));
         assertTrue(properties.containsKey("hg.tags[1]"));
+        assertTrue(properties.containsKey("hg.tag"));
         assertEquals(properties.get("hg.tags"), String.join(";", expectedTags));
         assertEquals(properties.get("hg.tags[0]"), firstTag);
         assertEquals(properties.get("hg.tags[1]"), secondTag);
+        assertEquals(properties.get("hg.tag"), firstTag);
     }
 
     @Test

@@ -1,9 +1,7 @@
-import com.aragost.javahg.Changeset;
 import com.aragost.javahg.Repository;
 import domain.RepositoryInfo;
 import org.junit.Ignore;
 import org.junit.Test;
-import service.changeset.CurrentChangeSet;
 import service.exceptions.ChangesetNotFound;
 
 import java.io.File;

@@ -25,6 +25,14 @@ public class Tags implements RecordableProperty {
     public void fillProperties(Properties properties) {
         fillAsList(properties);
         fillEach(properties);
+        fillFirst(properties);
+    }
+
+    private void fillFirst(Properties properties) {
+        String key = "hg.tag";
+        if (tags.size() > 0) {
+            properties.put(key, tags.get(0));
+        } else properties.put(key, "");
     }
 
     private void fillEach(Properties properties) {
