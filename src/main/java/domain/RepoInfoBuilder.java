@@ -11,11 +11,11 @@ public class RepoInfoBuilder {
     private String hgBranch;
     private String hgRevision;
     private String hgRevisionHash;
-    private String hgTags;
     private String hgAuthor;
     private String hgDescription;
     private String hgDate;
     private String hgBookmarks;
+    private Tags tags;
 
     public RepoInfoBuilder setHgBranch(String hgBranch) {
         this.hgBranch = hgBranch;
@@ -32,15 +32,13 @@ public class RepoInfoBuilder {
         return this;
     }
 
-    public RepoInfoBuilder setHgTags(String hgTags) {
-        this.hgTags = hgTags;
+    public RepoInfoBuilder setHgTags(Tags tags) {
+        this.tags = tags;
         return this;
     }
 
     public RepoInfoBuilder setHgTags(Collection<String> tags) {
-        if (tags.isEmpty())
-            return setHgTags("tip");
-        else return setHgTags(String.join(";", tags));
+        return setHgTags(new Tags(tags));
     }
 
     public RepoInfoBuilder setBookmarks(String bookmarks) {
@@ -74,6 +72,6 @@ public class RepoInfoBuilder {
     }
 
     public RepoInfo create() {
-        return new RepoInfo(hgBranch, hgRevision, hgRevisionHash, hgTags, hgAuthor, hgDescription, hgDate, hgBookmarks);
+        return new RepoInfo(hgBranch, hgRevision, hgRevisionHash, tags, hgAuthor, hgDescription, hgDate, hgBookmarks);
     }
 }

@@ -1,31 +1,32 @@
 package domain;
 
+import com.aragost.javahg.Changeset;
+
 public class RepoInfo {
 
-    String hgBranch;
-    String hgRevision;
-    String hgRevisionHash;
-    String hgTags;
-    String hgAuthor;
-    String hgDescription;
-    String hgDate;
-    String hgBookmarks;
+    private String hgBranch;
+    private String hgRevision;
+    private String hgRevisionHash;
+    private String hgAuthor;
+    private String hgDescription;
+    private String hgDate;
+    private String hgBookmarks;
+    private Tags tags;
 
-    RepoInfo(String hgBranch, String hgRevision, String hgRevisionHash, String hgTags, String hgAuthor, String hgDescription, String hgDate, String hgBookmarks) {
+
+    public RepoInfo(Changeset changeset, String hgBookmarks) {
+        this(changeset.getBranch(), String.valueOf(changeset.getRevision()), changeset.getNode(), new Tags(changeset), changeset.getUser(), changeset.getMessage(), new CommitDate(changeset).toString(), hgBookmarks);
+    }
+
+    RepoInfo(String hgBranch, String hgRevision, String hgRevisionHash, Tags tags, String hgAuthor, String hgDescription, String hgDate, String hgBookmarks) {
         this.hgBranch = hgBranch;
         this.hgRevision = hgRevision;
         this.hgRevisionHash = hgRevisionHash;
-        this.hgTags = hgTags;
+        this.tags = tags;
         this.hgAuthor = hgAuthor;
         this.hgDescription = hgDescription;
         this.hgDate = hgDate;
         this.hgBookmarks = hgBookmarks;
-    }
-
-    public static RepoInfo create(String hgBranch, String hgRevision, String hgRevisionHash, String hgTags, String hgAuthor, String hgDescription, String hgDate, String hgBookmarks) {
-        return new RepoInfoBuilder().setHgBranch(hgBranch).setHgRevision(hgRevision).setHgRevisionHash(hgRevisionHash).setHgTags(hgTags).setHgAuthor(hgAuthor).setHgDescription(hgDescription)
-                .setBookmarks(hgBookmarks)
-                .setHgDate(hgDate).create();
     }
 
     public String getHgBranch() {
@@ -38,10 +39,6 @@ public class RepoInfo {
 
     public String getHgRevisionHash() {
         return hgRevisionHash;
-    }
-
-    public String getHgTags() {
-        return hgTags;
     }
 
     public String getHgAuthor() {
@@ -58,5 +55,24 @@ public class RepoInfo {
 
     public String getHgBookmarks() {
         return hgBookmarks;
+    }
+
+    public Tags getTags() {
+        return tags;
+    }
+
+
+    @Override
+    public String toString() {
+        return "RepoInfo{" +
+                "hgBranch='" + hgBranch + '\'' +
+                ", hgRevision='" + hgRevision + '\'' +
+                ", hgRevisionHash='" + hgRevisionHash + '\'' +
+                ", hgAuthor='" + hgAuthor + '\'' +
+                ", hgDescription='" + hgDescription + '\'' +
+                ", hgDate='" + hgDate + '\'' +
+                ", hgBookmarks='" + hgBookmarks + '\'' +
+                ", tags=" + tags +
+                '}';
     }
 }

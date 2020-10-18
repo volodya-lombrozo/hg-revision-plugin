@@ -13,14 +13,14 @@ public class PropertiesSetter {
     }
 
     public void setProperties(RepoInfo info) {
-        props.setProperty("hg.author", info.getHgAuthor());
-        props.setProperty("hg.tags", info.getHgTags());
+        props.setProperty("hg.author", info.getHgAuthor());//done
         props.setProperty("hg.branch", info.getHgBranch());
         props.setProperty("hg.date", info.getHgDate());
         props.setProperty("hg.desc", info.getHgDescription());
         props.setProperty("hg.rev", info.getHgRevision());
         props.setProperty("hg.node", info.getHgRevisionHash());
         props.setProperty("hg.bookmarks", info.getHgBookmarks());
+        info.getTags().fillProperties(props);
     }
 
 }
