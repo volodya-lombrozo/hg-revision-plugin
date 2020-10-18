@@ -3,6 +3,7 @@ package domain;
 import com.aragost.javahg.Changeset;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.stream.Collectors;
@@ -10,20 +11,28 @@ import java.util.stream.IntStream;
 
 public class Tags implements RecordableProperty {
 
-    private final Collection<String> tags;
+    private final List<String> tags;
 
     public Tags(Changeset changeset) {
         this(changeset.tags());
     }
 
-    public Tags(Collection<String> tags) {
+    public Tags(List<String> tags) {
         this.tags = tags;
     }
 
     @Override
     public void fillProperties(Properties properties) {
+        fillAsList(properties);
+        fillEach(properties);
+    }
+
+    private void fillEach(Properties properties) {
         Map<String, String> tagsMap = toMap();
         tagsMap.forEach(properties::setProperty);
+    }
+
+    private void fillAsList(Properties properties) {
         properties.setProperty("hg.tags", toString());
     }
 
@@ -32,11 +41,11 @@ public class Tags implements RecordableProperty {
     }
 
     private String tagValue(int tagNumber) {
-        return "";
+        return tags.get(tagNumber);
     }
 
     private String tagKey(int tagNumber) {
-        return "ht.tags[" + tagNumber + "]";
+        return "hg.tags[" + tagNumber + "]";
     }
 
     @Override
