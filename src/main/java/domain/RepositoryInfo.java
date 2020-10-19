@@ -31,7 +31,8 @@ public class RepositoryInfo {
         RecordableProperty revision = new Revision(currentCommit);
         RecordableProperty tags = new Tags(currentCommit);
         RecordableProperty bookmarks = new Bookmarks(repository);
-        return Arrays.asList(author, branch, commitDate, description, node, revision, tags, bookmarks);
+        RecordableProperty previousTags = new PreviousTags(currentCommit);
+        return Arrays.asList(author, branch, commitDate, description, node, revision, tags, bookmarks, previousTags);
     }
 
     @Override

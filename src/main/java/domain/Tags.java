@@ -2,7 +2,6 @@ package domain;
 
 import com.aragost.javahg.Changeset;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -12,13 +11,19 @@ import java.util.stream.IntStream;
 public class Tags implements RecordableProperty {
 
     private final List<String> tags;
+    private final String postfix;
 
     public Tags(Changeset changeset) {
         this(changeset.tags());
     }
 
     public Tags(List<String> tags) {
+        this(tags, "");
+    }
+
+    public Tags(List<String> tags, String postfix) {
         this.tags = tags;
+        this.postfix = postfix;
     }
 
     @Override
@@ -28,8 +33,14 @@ public class Tags implements RecordableProperty {
         fillFirst(properties);
     }
 
+    private String pointAndPostfix() {
+        if (postfix == null || postfix.isEmpty())
+            return "";
+        else return "." + postfix;
+    }
+
     private void fillFirst(Properties properties) {
-        String key = "hg.tag";
+        String key = "hg.tag" + pointAndPostfix();
         if (tags.size() > 0) {
             properties.put(key, tags.get(0));
         } else properties.put(key, "");
@@ -41,7 +52,7 @@ public class Tags implements RecordableProperty {
     }
 
     private void fillAsList(Properties properties) {
-        properties.setProperty("hg.tags", toString());
+        properties.setProperty("hg.tags" + pointAndPostfix(), toString());
     }
 
     public Map<String, String> toMap() {
@@ -53,7 +64,7 @@ public class Tags implements RecordableProperty {
     }
 
     private String tagKey(int tagNumber) {
-        return "hg.tags[" + tagNumber + "]";
+        return "hg.tags" + pointAndPostfix() + "[" + tagNumber + "]";
     }
 
     @Override

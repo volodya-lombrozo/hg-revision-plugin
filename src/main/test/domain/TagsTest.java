@@ -5,8 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import java.time.DayOfWeek;
-import java.time.Period;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
