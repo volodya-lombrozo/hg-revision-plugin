@@ -5,7 +5,6 @@ import util.ChangesetTags;
 import util.ChangesetTime;
 
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -22,21 +21,19 @@ public class PreviousTags implements RecordableProperty {
     }
 
     private List<String> findPreviousTags() {
-        Changeset current = changeset.getParent1();
-        List<String> res = new ArrayList<>();
-        while (res.isEmpty() && current != null) {
-            if (current.tags() != null && !current.tags().isEmpty())
-                res.addAll(current.tags());
-            current = current.getParent1();
-        }
-        return res;
+        TimedTags previousTags = TimedTags.later(findPreviousTags(changeset.getParent1()), findPreviousTags(changeset.getParent2()));
+        return previousTags.getTags();
     }
 
     private TimedTags findPreviousTags(Changeset changeset) {
         TimedTags timedTags = new TimedTags(changeset);
-        if (timedTags.hasTags())
+        if (timedTags.hasTags() || changeset == null)
             return timedTags;
-        else return TimedTags.later(findPreviousTags(changeset.getParent1()), findPreviousTags(changeset.getParent2()));
+        else {
+            TimedTags firstParent = findPreviousTags(changeset.getParent1());
+            TimedTags secondParent = findPreviousTags(changeset.getParent2());
+            return TimedTags.later(firstParent, secondParent);
+        }
     }
 
     @Override

@@ -30,6 +30,7 @@ public class PreviousTagsTest {
         when(dateTime.getDate()).thenReturn(new Date());
         when(changeset.getTimestamp()).thenReturn(dateTime);
         when(child.tags()).thenReturn(expectedTags);
+        when(child.getTimestamp()).thenReturn(dateTime);
     }
 
     @Test
