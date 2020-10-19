@@ -9,7 +9,7 @@ import java.util.Properties;
 
 import static org.junit.Assert.assertNotNull;
 
-//@Ignore("For manual testing only")
+@Ignore("For manual testing only")
 public class ScanTest {
 
     @Test
