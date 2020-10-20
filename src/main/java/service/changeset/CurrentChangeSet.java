@@ -2,6 +2,10 @@ package service.changeset;
 
 import com.aragost.javahg.Changeset;
 import com.aragost.javahg.Repository;
+import com.aragost.javahg.commands.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class CurrentChangeSet implements ChangesetAdapter {
 

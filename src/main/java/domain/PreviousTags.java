@@ -5,12 +5,15 @@ import util.ChangesetTags;
 import util.ChangesetTime;
 
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Properties;
 
 public class PreviousTags implements RecordableProperty {
 
     private final Changeset changeset;
+    private final HashSet<TimedTags> alreadyVisited = new HashSet<>();
 
     public PreviousTags(Changeset changeset) {
         this.changeset = changeset;
@@ -27,6 +30,9 @@ public class PreviousTags implements RecordableProperty {
 
     private TimedTags findPreviousTags(Changeset changeset) {
         TimedTags timedTags = new TimedTags(changeset);
+        if(alreadyVisited.contains(timedTags))
+            return timedTags;
+        else alreadyVisited.add(timedTags);
         if (timedTags.hasTags() || changeset == null)
             return timedTags;
         else {
@@ -76,6 +82,21 @@ public class PreviousTags implements RecordableProperty {
             if (first.time.isAfter(second.time))
                 return first;
             else return second;
+        }
+
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            TimedTags timedTags = (TimedTags) o;
+            return Objects.equals(time, timedTags.time) &&
+                    Objects.equals(tags, timedTags.tags);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(time, tags);
         }
     }
 }

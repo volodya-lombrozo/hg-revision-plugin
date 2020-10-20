@@ -6,7 +6,7 @@
 
     <groupId>com.github.volodya-lombrozo</groupId>
     <artifactId>hg-revision-plugin</artifactId>
-    <version>0.4</version>
+    <version>0.5</version>
     <packaging>maven-plugin</packaging>
     <name>${project.groupId}:${project.artifactId}</name>
     <description>Hg revision maven plugin</description>
