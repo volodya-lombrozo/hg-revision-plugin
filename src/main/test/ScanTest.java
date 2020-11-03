@@ -9,12 +9,13 @@ import java.util.Properties;
 
 import static org.junit.Assert.assertNotNull;
 
-@Ignore("For manual testing only")
+//@Ignore("For manual testing only")
 public class ScanTest {
 
     @Test
     public void currentChangeSetTest() throws ChangesetNotFound {
-        String pathname = "D:\\workspace\\hg_repo"; //put your path here
+//        String pathname = "D:\\workspace\\hg_repo"; //put your path here
+        String pathname = "D:\\workspace\\GP\\BetsProcessingService";
         Repository repository = Repository.open(new File(pathname));
 
         Properties properties = new Properties();

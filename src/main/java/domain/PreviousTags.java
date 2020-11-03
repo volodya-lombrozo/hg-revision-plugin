@@ -30,9 +30,9 @@ public class PreviousTags implements RecordableProperty {
 
     private TimedTags findPreviousTags(Changeset changeset) {
         TimedTags timedTags = new TimedTags(changeset);
-        if(alreadyVisited.contains(timedTags))
+        if (alreadyVisited(timedTags))
             return timedTags;
-        else alreadyVisited.add(timedTags);
+        else savedAsVisited(timedTags);
         if (timedTags.hasTags() || changeset == null)
             return timedTags;
         else {
@@ -40,6 +40,14 @@ public class PreviousTags implements RecordableProperty {
             TimedTags secondParent = findPreviousTags(changeset.getParent2());
             return TimedTags.later(firstParent, secondParent);
         }
+    }
+
+    private boolean alreadyVisited(TimedTags timedTags) {
+        return alreadyVisited.contains(timedTags);
+    }
+
+    private void savedAsVisited(TimedTags timedTags) {
+        alreadyVisited.add(timedTags);
     }
 
     @Override
@@ -79,9 +87,13 @@ public class PreviousTags implements RecordableProperty {
         }
 
         static TimedTags later(TimedTags first, TimedTags second) {
-            if (first.time.isAfter(second.time))
+            if (first.hasTags() && second.hasTags()) {
+                if (first.time.isAfter(second.time))
+                    return first;
+                else return second;
+            } else if (first.hasTags()) {
                 return first;
-            else return second;
+            } else return second;
         }
 
 
