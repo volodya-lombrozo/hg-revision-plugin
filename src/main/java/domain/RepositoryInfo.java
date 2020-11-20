@@ -8,6 +8,9 @@ import service.exceptions.ChangesetNotFound;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public class RepositoryInfo {
 
@@ -17,11 +20,17 @@ public class RepositoryInfo {
         this.repository = repository;
     }
 
-    public void fillProperties(Properties properties) throws ChangesetNotFound {
+    public void fillProperties(Properties properties) {
+        setWarningLogLevel();
         allRepoProperties().forEach(item -> item.fillProperties(properties));
     }
 
-    private List<RecordableProperty> allRepoProperties() throws ChangesetNotFound {
+    private void setWarningLogLevel() {
+        Logger logger = Logger.getLogger("com.aragost.javahg.internals.Server");
+        logger.setLevel(Level.WARNING);
+    }
+
+    private List<RecordableProperty> allRepoProperties() {
         Changeset currentCommit = new CurrentChangeSet(repository).toChangeSet();
         RecordableProperty author = new Author(currentCommit);
         RecordableProperty branch = new Branch(currentCommit);
@@ -33,24 +42,24 @@ public class RepositoryInfo {
         RecordableProperty bookmarks = new Bookmarks(repository);
         RecordableProperty previousTags = new PreviousTags(currentCommit);
         RecordableProperty commitNumber = new CommitNumber(currentCommit);
-        return Arrays.asList(author, branch, commitDate, description, node,
+        return asLoggableProperties(author, branch, commitDate, description, node,
                 revision, tags, bookmarks
-                ,previousTags
-                ,commitNumber
+                , previousTags
+                , commitNumber
         );
+    }
+
+    private List<RecordableProperty> asLoggableProperties(RecordableProperty... properties) {
+        return Arrays.stream(properties).map(Loggable::new).collect(Collectors.toList());
     }
 
     @Override
     public String toString() {
-        try {
-            StringBuilder sb = new StringBuilder();
-            allRepoProperties().forEach(item -> sb.append(item.getClass().getName())
-                    .append(":")
-                    .append(item.toString())
-                    .append("\n"));
-            return sb.toString();
-        } catch (ChangesetNotFound changesetNotFound) {
-            return changesetNotFound.getMessage();
-        }
+        StringBuilder sb = new StringBuilder();
+        allRepoProperties().forEach(item -> sb.append(item.getClass().getName())
+                .append(":")
+                .append(item.toString())
+                .append("\n"));
+        return sb.toString();
     }
 }
