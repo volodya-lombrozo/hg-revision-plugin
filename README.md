@@ -4,7 +4,7 @@
             <plugin>
                 <groupId>com.github.volodya-lombrozo</groupId>
                 <artifactId>hg-revision-plugin</artifactId>
-                <version>0.4</version>
+                <version>0.6</version>
                 <executions>
                     <execution>
                         <phase>
