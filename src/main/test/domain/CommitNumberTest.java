@@ -34,7 +34,7 @@ public class CommitNumberTest {
 
     @Test
     public void fillProperties_fiveChildrenAsDifficultLoop() {
-        fiveChildrenAsLoop();
+        fiveChildrenAsRound();
         RecordableProperty commitNumber = new CommitNumber(changeset);
         Properties properties = new Properties();
 
@@ -55,7 +55,7 @@ public class CommitNumberTest {
     }
 
 
-    private void fiveChildrenAsLoop() {
+    private void fiveChildrenAsRound() {
         Changeset child = rightChild(leftChild(leftChild(this.changeset)));
         when(changeset.getParent2()).thenReturn(child);
         leftChild(child);

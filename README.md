@@ -4,7 +4,7 @@
             <plugin>
                 <groupId>com.github.volodya-lombrozo</groupId>
                 <artifactId>hg-revision-plugin</artifactId>
-                <version>0.7</version>
+                <version>0.8</version>
                 <executions>
                     <execution>
                         <phase>
@@ -33,6 +33,7 @@
       * hg.tag.previous - _previous closest first tag attached to parent commit - equal to hg.tags.previous[0]_
       * hg.tags.previous[i] - _previous closest tag by number i attached to parent commit_
       * hg.commit.number - _commit number in current branch_
+      * hg.commit.number.from.previous.tag - _commit number from previous tag_
 
 3. Example project
 

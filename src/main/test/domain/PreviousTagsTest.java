@@ -22,15 +22,18 @@ public class PreviousTagsTest {
     private final List<String> expectedTags = Arrays.asList(firstTag, secondTag);
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         changeset = Mockito.mock(Changeset.class);
-        Changeset child = Mockito.mock(Changeset.class);
-        when(changeset.getParent1()).thenReturn(child);
+        Changeset firstChild = Mockito.mock(Changeset.class);
+        Changeset secondChild = Mockito.mock(Changeset.class);
+        when(changeset.getParent1()).thenReturn(firstChild);
+        when(firstChild.getParent1()).thenReturn(secondChild);
         DateTime dateTime = Mockito.mock(DateTime.class);
         when(dateTime.getDate()).thenReturn(new Date());
         when(changeset.getTimestamp()).thenReturn(dateTime);
-        when(child.tags()).thenReturn(expectedTags);
-        when(child.getTimestamp()).thenReturn(dateTime);
+        when(firstChild.getTimestamp()).thenReturn(dateTime);
+        when(secondChild.tags()).thenReturn(expectedTags);
+        when(secondChild.getTimestamp()).thenReturn(dateTime);
     }
 
     @Test
@@ -48,6 +51,7 @@ public class PreviousTagsTest {
         assertEquals(properties.get("hg.tags.previous[0]"), firstTag);
         assertEquals(properties.get("hg.tags.previous[1]"), secondTag);
         assertEquals(properties.get("hg.tag.previous"), firstTag);
+        assertEquals(properties.get("hg.commit.number.from.previous.tag"), "2");
     }
 
     @Test

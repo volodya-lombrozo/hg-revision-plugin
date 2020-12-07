@@ -19,25 +19,25 @@ public class PreviousTags implements RecordableProperty {
         this.changeset = changeset;
     }
 
-    private Tags toTags() {
-        return new Tags(findPreviousTags(), "previous");
+    private Tags toTags(TimedTags timedTags) {
+        return new Tags(timedTags.getTags(), "previous");
     }
 
-    private List<String> findPreviousTags() {
-        TimedTags previousTags = TimedTags.later(findPreviousTags(changeset.getParent1()), findPreviousTags(changeset.getParent2()));
-        return previousTags.getTags();
+    private TimedTags findPreviousTags() {
+        int step = 1;
+        return TimedTags.later(findPreviousTags(step, changeset.getParent1()), findPreviousTags(step, changeset.getParent2()));
     }
 
-    private TimedTags findPreviousTags(Changeset changeset) {
-        TimedTags timedTags = new TimedTags(changeset);
+    private TimedTags findPreviousTags(int step, Changeset changeset) {
+        TimedTags timedTags = new TimedTags(step, changeset);
         if (alreadyVisited(timedTags))
             return timedTags;
         else savedAsVisited(timedTags);
         if (timedTags.hasTags() || changeset == null)
             return timedTags;
         else {
-            TimedTags firstParent = findPreviousTags(changeset.getParent1());
-            TimedTags secondParent = findPreviousTags(changeset.getParent2());
+            TimedTags firstParent = findPreviousTags(step + 1, changeset.getParent1());
+            TimedTags secondParent = findPreviousTags(step + 1, changeset.getParent2());
             return TimedTags.later(firstParent, secondParent);
         }
     }
@@ -52,7 +52,9 @@ public class PreviousTags implements RecordableProperty {
 
     @Override
     public void fillProperties(Properties properties) {
-        toTags().fillProperties(properties);
+        TimedTags previousTags = findPreviousTags();
+        toTags(previousTags).fillProperties(properties);
+        properties.setProperty("hg.commit.number.from.previous.tag", String.valueOf(previousTags.getStep()));
     }
 
     @Override
@@ -66,14 +68,16 @@ public class PreviousTags implements RecordableProperty {
 
     private static class TimedTags {
 
+        private final int step;
         private final Instant time;
         private final List<String> tags;
 
-        TimedTags(Changeset changeset) {
-            this(new ChangesetTime(changeset).toInstant(), new ChangesetTags(changeset).toTags());
+        TimedTags(int step, Changeset changeset) {
+            this(step, new ChangesetTime(changeset).toInstant(), new ChangesetTags(changeset).toTags());
         }
 
-        TimedTags(Instant time, List<String> tags) {
+        TimedTags(int step, Instant time, List<String> tags) {
+            this.step = step;
             this.time = time;
             this.tags = tags;
         }
@@ -84,6 +88,10 @@ public class PreviousTags implements RecordableProperty {
 
         public List<String> getTags() {
             return tags;
+        }
+
+        public int getStep() {
+            return step;
         }
 
         static TimedTags later(TimedTags first, TimedTags second) {
