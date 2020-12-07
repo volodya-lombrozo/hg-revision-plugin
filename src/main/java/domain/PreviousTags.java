@@ -54,7 +54,10 @@ public class PreviousTags implements RecordableProperty {
     public void fillProperties(Properties properties) {
         TimedTags previousTags = findPreviousTags();
         toTags(previousTags).fillProperties(properties);
-        properties.setProperty("hg.commit.number.from.previous.tag", String.valueOf(previousTags.getStep()));
+        if (previousTags.isEmpty())
+            properties.setProperty("hg.commit.number.from.previous.tag", "");
+        else
+            properties.setProperty("hg.commit.number.from.previous.tag", String.valueOf(previousTags.getStep()));
     }
 
     @Override
@@ -92,6 +95,10 @@ public class PreviousTags implements RecordableProperty {
 
         public int getStep() {
             return step;
+        }
+
+        public boolean isEmpty() {
+            return tags == null || tags.isEmpty();
         }
 
         static TimedTags later(TimedTags first, TimedTags second) {

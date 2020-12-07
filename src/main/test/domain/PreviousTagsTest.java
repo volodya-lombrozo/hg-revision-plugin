@@ -54,6 +54,17 @@ public class PreviousTagsTest {
         assertEquals(properties.get("hg.commit.number.from.previous.tag"), "2");
     }
 
+
+    @Test
+    public void commitNumberFromPreviousTag_tagsNotFound() {
+        RecordableProperty previousTags = new PreviousTags(Mockito.mock(Changeset.class));
+        Properties properties = new Properties();
+
+        previousTags.fillProperties(properties);
+
+        assertEquals(properties.get("hg.commit.number.from.previous.tag"), "");
+    }
+
     @Test
     public void fillProperties_parentChangeSetIsNull() {
         RecordableProperty previousTags = new PreviousTags(Mockito.mock(Changeset.class));
