@@ -2,6 +2,7 @@ package domain;
 
 import com.aragost.javahg.Changeset;
 import com.aragost.javahg.Repository;
+import domain.repo.JavaHgChangeset;
 import service.changeset.CurrentChangeSet;
 import service.exceptions.ChangesetNotFound;
 
@@ -32,7 +33,7 @@ public class RepositoryInfo {
 
     private List<RecordableProperty> allRepoProperties() {
         Changeset currentCommit = new CurrentChangeSet(repository).toChangeSet();
-        RecordableProperty author = new Author(currentCommit);
+        RecordableProperty author = new Author(new JavaHgChangeset(currentCommit));
         RecordableProperty branch = new Branch(currentCommit);
         RecordableProperty commitDate = new CommitDate(currentCommit);
         RecordableProperty description = new Description(currentCommit);
