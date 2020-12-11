@@ -3,6 +3,7 @@ package domain;
 import com.aragost.javahg.Changeset;
 import com.aragost.javahg.Repository;
 import domain.repo.JavaHgChangeset;
+import domain.repo.JavaHgRepository;
 import service.changeset.CurrentChangeSet;
 import service.exceptions.ChangesetNotFound;
 
@@ -40,7 +41,7 @@ public class RepositoryInfo {
         RecordableProperty node = new Node(currentCommit);
         RecordableProperty revision = new Revision(currentCommit);
         RecordableProperty tags = new Tags(currentCommit);
-        RecordableProperty bookmarks = new Bookmarks(repository);
+        RecordableProperty bookmarks = new Bookmarks(new JavaHgRepository(repository));
         RecordableProperty previousTags = new PreviousTags(currentCommit);
         RecordableProperty commitNumber = new CommitNumber(currentCommit);
         return asLoggableProperties(author, branch, commitDate, description, node,

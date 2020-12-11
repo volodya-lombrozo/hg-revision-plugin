@@ -1,8 +1,6 @@
 package domain;
 
-import com.aragost.javahg.Repository;
-import domain.util.BookmarksExtractor;
-import domain.util.CommandExtractor;
+import domain.repo.Repository;
 
 import java.util.List;
 import java.util.Properties;
@@ -10,15 +8,9 @@ import java.util.Properties;
 public class Bookmarks implements RecordableProperty {
 
     private final Repository repository;
-    private final BookmarksExtractor extractor;
 
     public Bookmarks(Repository repository) {
-        this(repository, new CommandExtractor(repository));
-    }
-
-    public Bookmarks(Repository repository, BookmarksExtractor extractor) {
         this.repository = repository;
-        this.extractor = extractor;
     }
 
     @Override
@@ -28,7 +20,7 @@ public class Bookmarks implements RecordableProperty {
 
     @Override
     public String toString() {
-        List<String> bookmarks = extractor.extract();
+        List<String> bookmarks = repository.bookmarks();
         return String.join(";", bookmarks);
     }
 }

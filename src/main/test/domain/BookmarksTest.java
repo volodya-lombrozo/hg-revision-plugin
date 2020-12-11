@@ -1,33 +1,32 @@
 package domain;
 
-import com.aragost.javahg.Repository;
-import domain.util.BookmarksExtractor;
-import domain.util.FakeExtractor;
+import domain.repo.Repository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import java.util.Collections;
 import java.util.Properties;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.when;
 
 public class BookmarksTest {
 
     private Repository repository;
-    private BookmarksExtractor extractor;
     private String expected;
 
     @Before
     public void setUp() {
         repository = Mockito.mock(Repository.class);
         expected = "Bookmarks";
-        extractor = new FakeExtractor(expected);
+        when(repository.bookmarks()).thenReturn(Collections.singletonList(expected));
     }
 
     @Test
     public void fillProperties() {
         Properties properties = new Properties();
-        RecordableProperty bookmarks = new Bookmarks(repository, extractor);
+        RecordableProperty bookmarks = new Bookmarks(repository);
 
         bookmarks.fillProperties(properties);
 
@@ -38,7 +37,7 @@ public class BookmarksTest {
 
     @Test
     public void testToString() {
-        RecordableProperty bookmarks = new Bookmarks(repository, extractor);
+        RecordableProperty bookmarks = new Bookmarks(repository);
 
         String actual = bookmarks.toString();
 
