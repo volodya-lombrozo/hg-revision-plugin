@@ -4,5 +4,7 @@ public interface Changeset {
 
     String getUser();
 
+    String getBranch();
+
 
 }

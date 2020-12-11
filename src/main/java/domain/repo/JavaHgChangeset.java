@@ -12,4 +12,9 @@ public class JavaHgChangeset implements Changeset {
     public String getUser() {
         return delegate.getUser();
     }
+
+    @Override
+    public String getBranch() {
+        return delegate.getBranch();
+    }
 }
