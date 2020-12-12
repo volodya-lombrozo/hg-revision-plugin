@@ -37,4 +37,9 @@ public class JavaHgChangeset implements Changeset {
     public Changeset getRightParent() {
         return new JavaHgChangeset(delegate.getParent2());
     }
+
+    @Override
+    public String getMessage() {
+        return delegate.getMessage();
+    }
 }

@@ -11,4 +11,6 @@ public interface Changeset {
     Changeset getLeftParent();
 
     Changeset getRightParent();
+
+    String getMessage();
 }
