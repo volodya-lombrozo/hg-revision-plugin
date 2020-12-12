@@ -1,5 +1,8 @@
 package domain.repo;
 
+import com.aragost.javahg.DateTime;
+import util.FormattedDateTime;
+
 public class JavaHgChangeset implements Changeset {
 
     private final com.aragost.javahg.Changeset delegate;
@@ -16,5 +19,12 @@ public class JavaHgChangeset implements Changeset {
     @Override
     public String getBranch() {
         return delegate.getBranch();
+    }
+
+    @Override
+    public String getDateTime() {
+        DateTime timestamp = delegate.getTimestamp();
+        if (timestamp == null) return "";
+        else return new FormattedDateTime(timestamp.getDate()).toString();
     }
 }

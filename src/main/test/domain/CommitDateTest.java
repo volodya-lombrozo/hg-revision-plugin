@@ -1,14 +1,11 @@
 package domain;
 
-import com.aragost.javahg.Changeset;
-import com.aragost.javahg.DateTime;
+import domain.repo.Changeset;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import util.FormattedDateTime;
 
-import java.text.DateFormat;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Properties;
 
@@ -19,16 +16,14 @@ import static org.mockito.Mockito.when;
 public class CommitDateTest {
 
     private Changeset changeset;
-    private Date date = new Date();
-    private String expectedDate = DateTimeFormatter.ISO_DATE_TIME.format(date.toInstant().atZone(ZoneId.systemDefault()));
+    private final Date date = new Date();
+    private final String expectedDate = new FormattedDateTime(date).toString();
 
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         changeset = Mockito.mock(Changeset.class);
-        DateTime mock = Mockito.mock(DateTime.class);
-        when(mock.getDate()).thenReturn(date);
-        when(changeset.getTimestamp()).thenReturn(mock);
+        when(changeset.getDateTime()).thenReturn(expectedDate);
     }
 
     @Test

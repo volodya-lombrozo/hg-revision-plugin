@@ -36,7 +36,7 @@ public class RepositoryInfo {
         Changeset currentCommit = new CurrentChangeSet(repository).toChangeSet();
         RecordableProperty author = new Author(new JavaHgChangeset(currentCommit));
         RecordableProperty branch = new Branch(new JavaHgChangeset(currentCommit));
-        RecordableProperty commitDate = new CommitDate(currentCommit);
+        RecordableProperty commitDate = new CommitDate(new JavaHgChangeset(currentCommit));
         RecordableProperty description = new Description(currentCommit);
         RecordableProperty node = new Node(currentCommit);
         RecordableProperty revision = new Revision(currentCommit);
