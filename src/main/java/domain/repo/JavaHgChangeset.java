@@ -42,4 +42,9 @@ public class JavaHgChangeset implements Changeset {
     public String getMessage() {
         return delegate.getMessage();
     }
+
+    @Override
+    public String getNode() {
+        return delegate.getNode();
+    }
 }

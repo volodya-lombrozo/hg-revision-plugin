@@ -13,4 +13,6 @@ public interface Changeset {
     Changeset getRightParent();
 
     String getMessage();
+
+    String getNode();
 }

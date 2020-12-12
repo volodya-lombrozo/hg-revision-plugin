@@ -1,6 +1,6 @@
 package domain;
 
-import com.aragost.javahg.Changeset;
+import domain.repo.Changeset;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;

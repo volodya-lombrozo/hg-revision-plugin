@@ -1,6 +1,7 @@
 package domain;
 
-import com.aragost.javahg.Changeset;
+
+import domain.repo.Changeset;
 
 import java.util.Properties;
 

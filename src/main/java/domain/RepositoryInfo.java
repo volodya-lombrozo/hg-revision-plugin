@@ -38,7 +38,7 @@ public class RepositoryInfo {
         RecordableProperty branch = new Branch(new JavaHgChangeset(currentCommit));
         RecordableProperty commitDate = new CommitDate(new JavaHgChangeset(currentCommit));
         RecordableProperty description = new Description(new JavaHgChangeset(currentCommit));
-        RecordableProperty node = new Node(currentCommit);
+        RecordableProperty node = new Node(new JavaHgChangeset(currentCommit));
         RecordableProperty revision = new Revision(currentCommit);
         RecordableProperty tags = new Tags(currentCommit);
         RecordableProperty bookmarks = new Bookmarks(new JavaHgRepository(repository));
