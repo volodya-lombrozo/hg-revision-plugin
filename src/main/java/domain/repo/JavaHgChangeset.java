@@ -27,4 +27,14 @@ public class JavaHgChangeset implements Changeset {
         if (timestamp == null) return "";
         else return new FormattedDateTime(timestamp.getDate()).toString();
     }
+
+    @Override
+    public Changeset getLeftParent() {
+        return new JavaHgChangeset(delegate.getParent1());
+    }
+
+    @Override
+    public Changeset getRightParent() {
+        return new JavaHgChangeset(delegate.getParent2());
+    }
 }

@@ -1,6 +1,7 @@
 package domain;
 
-import com.aragost.javahg.Changeset;
+
+import domain.repo.Changeset;
 
 import java.util.HashSet;
 import java.util.Properties;
@@ -25,7 +26,7 @@ public class CommitNumber implements RecordableProperty {
             return 0;
         else {
             alreadyVisited.add(changeset);
-            return 1 + commitNumber(changeset.getParent1(), branch) + commitNumber(changeset.getParent2(), branch);
+            return 1 + commitNumber(changeset.getLeftParent(), branch) + commitNumber(changeset.getRightParent(), branch);
         }
     }
 

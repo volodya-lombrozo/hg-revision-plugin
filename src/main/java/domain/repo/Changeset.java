@@ -8,5 +8,7 @@ public interface Changeset {
 
     String getDateTime();
 
+    Changeset getLeftParent();
 
+    Changeset getRightParent();
 }

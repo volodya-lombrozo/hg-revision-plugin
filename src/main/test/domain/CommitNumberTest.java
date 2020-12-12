@@ -1,6 +1,6 @@
 package domain;
 
-import com.aragost.javahg.Changeset;
+import domain.repo.Changeset;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -51,13 +51,13 @@ public class CommitNumberTest {
         when(changeset.getBranch()).thenReturn(expectedBranch);
         Changeset child = Mockito.mock(Changeset.class);
         when(child.getBranch()).thenReturn(expectedBranch);
-        when(changeset.getParent2()).thenReturn(child);
+        when(changeset.getLeftParent()).thenReturn(child);
     }
 
 
     private void fiveChildrenAsRound() {
         Changeset child = rightChild(leftChild(leftChild(this.changeset)));
-        when(changeset.getParent2()).thenReturn(child);
+        when(changeset.getRightParent()).thenReturn(child);
         leftChild(child);
         rightChild(child);
     }
@@ -69,7 +69,7 @@ public class CommitNumberTest {
     private Changeset leftChild(Changeset changeset, String branch) {
         Changeset child = Mockito.mock(Changeset.class);
         when(child.getBranch()).thenReturn(branch);
-        when(changeset.getParent1()).thenReturn(child);
+        when(changeset.getLeftParent()).thenReturn(child);
         return child;
     }
 
@@ -80,7 +80,7 @@ public class CommitNumberTest {
     private Changeset rightChild(Changeset changeset, String branch) {
         Changeset child = Mockito.mock(Changeset.class);
         when(child.getBranch()).thenReturn(branch);
-        when(changeset.getParent2()).thenReturn(child);
+        when(changeset.getRightParent()).thenReturn(child);
         return child;
     }
 }
