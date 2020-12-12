@@ -1,9 +1,9 @@
 package domain;
 
-import com.aragost.javahg.Changeset;
-import com.aragost.javahg.Repository;
 import domain.repo.JavaHgChangeset;
 import domain.repo.JavaHgRepository;
+import domain.repo.Repository;
+import domain.repo.Changeset;
 import service.changeset.CurrentChangeSet;
 
 import java.util.Arrays;
@@ -32,17 +32,17 @@ public class RepositoryInfo {
     }
 
     private List<RecordableProperty> allRepoProperties() {
-        Changeset currentCommit = new CurrentChangeSet(repository).toChangeSet();
-        RecordableProperty author = new Author(new JavaHgChangeset(currentCommit));
-        RecordableProperty branch = new Branch(new JavaHgChangeset(currentCommit));
-        RecordableProperty commitDate = new CommitDate(new JavaHgChangeset(currentCommit));
-        RecordableProperty description = new Description(new JavaHgChangeset(currentCommit));
-        RecordableProperty node = new Node(new JavaHgChangeset(currentCommit));
-        RecordableProperty revision = new Revision(new JavaHgChangeset(currentCommit));
-        RecordableProperty tags = new Tags(new JavaHgChangeset(currentCommit));
-        RecordableProperty bookmarks = new Bookmarks(new JavaHgRepository(repository));
-        RecordableProperty previousTags = new PreviousTags(new JavaHgChangeset(currentCommit));
-        RecordableProperty commitNumber = new CommitNumber(new JavaHgChangeset(currentCommit));
+        Changeset changeset = new CurrentChangeSet(repository).toChangeSet();
+        RecordableProperty author = new Author(changeset);
+        RecordableProperty branch = new Branch(changeset);
+        RecordableProperty commitDate = new CommitDate(changeset);
+        RecordableProperty description = new Description(changeset);
+        RecordableProperty node = new Node(changeset);
+        RecordableProperty revision = new Revision(changeset);
+        RecordableProperty tags = new Tags(changeset);
+        RecordableProperty bookmarks = new Bookmarks(repository);
+        RecordableProperty previousTags = new PreviousTags(changeset);
+        RecordableProperty commitNumber = new CommitNumber(changeset);
         return asLoggableProperties(author, branch, commitDate, description, node,
                 revision, tags, bookmarks, previousTags, commitNumber
         );

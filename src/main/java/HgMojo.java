@@ -1,5 +1,6 @@
 import com.aragost.javahg.Repository;
 import domain.RepositoryInfo;
+import domain.repo.JavaHgRepository;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
@@ -28,7 +29,7 @@ public class HgMojo extends AbstractMojo {
             getLog().info("Start scanning of hg project");
             Repository repository = scanner.openRepository();
             getLog().info("Repository was opened");
-            RepositoryInfo info = new RepositoryInfo(repository);
+            RepositoryInfo info = new RepositoryInfo(new JavaHgRepository(repository));
             getLog().info("Starting setting properties...");
             info.fillProperties(project.getProperties());
             getLog().info("Scanning is done!");

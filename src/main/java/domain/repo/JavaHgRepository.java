@@ -18,4 +18,9 @@ public class JavaHgRepository implements Repository {
     public List<String> bookmarks() {
         return BookmarksCommand.on(delegate).list().stream().map(Bookmark::getName).collect(Collectors.toList());
     }
+
+    @Override
+    public Changeset currentChangeset() {
+        return new JavaHgChangeset(delegate.workingCopy().getParent1());
+    }
 }

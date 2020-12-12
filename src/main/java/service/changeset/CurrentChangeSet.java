@@ -1,11 +1,8 @@
 package service.changeset;
 
-import com.aragost.javahg.Changeset;
-import com.aragost.javahg.Repository;
-import com.aragost.javahg.commands.*;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import domain.repo.Changeset;
+import domain.repo.Repository;
 
 public class CurrentChangeSet implements ChangesetAdapter {
 
@@ -17,7 +14,7 @@ public class CurrentChangeSet implements ChangesetAdapter {
 
     @Override
     public Changeset toChangeSet() {
-        return repository.workingCopy().getParent1();
+        return repository.currentChangeset();
     }
 
 

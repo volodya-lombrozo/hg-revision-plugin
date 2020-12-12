@@ -1,6 +1,6 @@
 package service.changeset;
 
-import com.aragost.javahg.Changeset;
+import domain.repo.Changeset;
 import service.exceptions.ChangesetNotFound;
 
 public interface ChangesetAdapter {
