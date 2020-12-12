@@ -39,14 +39,12 @@ public class RepositoryInfo {
         RecordableProperty description = new Description(new JavaHgChangeset(currentCommit));
         RecordableProperty node = new Node(new JavaHgChangeset(currentCommit));
         RecordableProperty revision = new Revision(new JavaHgChangeset(currentCommit));
-        RecordableProperty tags = new Tags(currentCommit);
+        RecordableProperty tags = new Tags(new JavaHgChangeset(currentCommit));
         RecordableProperty bookmarks = new Bookmarks(new JavaHgRepository(repository));
         RecordableProperty previousTags = new PreviousTags(new JavaHgChangeset(currentCommit));
         RecordableProperty commitNumber = new CommitNumber(new JavaHgChangeset(currentCommit));
         return asLoggableProperties(author, branch, commitDate, description, node,
-                revision, tags, bookmarks
-                , previousTags
-                , commitNumber
+                revision, tags, bookmarks, previousTags, commitNumber
         );
     }
 
