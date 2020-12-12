@@ -23,7 +23,7 @@ public class CommitDateTest {
     @Before
     public void setUp() {
         changeset = Mockito.mock(Changeset.class);
-        when(changeset.getDateTime()).thenReturn(expectedDate);
+        when(changeset.getFormattedDateTime()).thenReturn(expectedDate);
     }
 
     @Test

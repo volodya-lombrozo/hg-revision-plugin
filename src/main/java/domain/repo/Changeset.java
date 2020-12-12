@@ -1,12 +1,17 @@
 package domain.repo;
 
+import java.time.Instant;
+import java.util.List;
+
 public interface Changeset {
 
     String getUser();
 
     String getBranch();
 
-    String getDateTime();
+    String getFormattedDateTime();
+
+    Instant getDateTime();
 
     Changeset getLeftParent();
 
@@ -15,4 +20,6 @@ public interface Changeset {
     String getMessage();
 
     String getNode();
+
+    List<String> tags();
 }

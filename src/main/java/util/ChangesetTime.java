@@ -1,7 +1,7 @@
 package util;
 
-import com.aragost.javahg.Changeset;
-import com.aragost.javahg.DateTime;
+
+import domain.repo.Changeset;
 
 import java.time.Instant;
 
@@ -14,9 +14,9 @@ public class ChangesetTime {
     }
 
     public Instant toInstant() {
-        if (changeset == null || changeset.getTimestamp() == null || changeset.getTimestamp().getDate() == null)
+        if (changeset == null || changeset.getDateTime() == null)
             return Instant.MIN;
-        else return changeset.getTimestamp().getDate().toInstant();
+        else return changeset.getDateTime();
     }
 
 }

@@ -1,6 +1,6 @@
 package domain;
 
-import com.aragost.javahg.Changeset;
+import domain.repo.Changeset;
 import util.ChangesetTags;
 import util.ChangesetTime;
 
@@ -25,7 +25,7 @@ public class PreviousTags implements RecordableProperty {
 
     private TimedTags findPreviousTags() {
         int step = 1;
-        return TimedTags.later(findPreviousTags(step, changeset.getParent1()), findPreviousTags(step, changeset.getParent2()));
+        return TimedTags.later(findPreviousTags(step, changeset.getLeftParent()), findPreviousTags(step, changeset.getRightParent()));
     }
 
     private TimedTags findPreviousTags(int step, Changeset changeset) {
@@ -36,8 +36,8 @@ public class PreviousTags implements RecordableProperty {
         if (timedTags.hasTags() || changeset == null)
             return timedTags;
         else {
-            TimedTags firstParent = findPreviousTags(step + 1, changeset.getParent1());
-            TimedTags secondParent = findPreviousTags(step + 1, changeset.getParent2());
+            TimedTags firstParent = findPreviousTags(step + 1, changeset.getLeftParent());
+            TimedTags secondParent = findPreviousTags(step + 1, changeset.getRightParent());
             return TimedTags.later(firstParent, secondParent);
         }
     }

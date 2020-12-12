@@ -3,6 +3,10 @@ package domain.repo;
 import com.aragost.javahg.DateTime;
 import util.FormattedDateTime;
 
+import java.time.Instant;
+import java.util.Date;
+import java.util.List;
+
 public class JavaHgChangeset implements Changeset {
 
     private final com.aragost.javahg.Changeset delegate;
@@ -22,10 +26,19 @@ public class JavaHgChangeset implements Changeset {
     }
 
     @Override
-    public String getDateTime() {
+    public String getFormattedDateTime() {
         DateTime timestamp = delegate.getTimestamp();
         if (timestamp == null) return "";
         else return new FormattedDateTime(timestamp.getDate()).toString();
+    }
+
+    @Override
+    public Instant getDateTime() {
+        DateTime timestamp = delegate.getTimestamp();
+        if (timestamp == null) return Instant.MIN;
+        Date date = timestamp.getDate();
+        if (date == null) return Instant.MIN;
+        return date.toInstant();
     }
 
     @Override
@@ -46,5 +59,10 @@ public class JavaHgChangeset implements Changeset {
     @Override
     public String getNode() {
         return delegate.getNode();
+    }
+
+    @Override
+    public List<String> tags() {
+        return delegate.tags();
     }
 }

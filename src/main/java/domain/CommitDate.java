@@ -20,6 +20,6 @@ public class CommitDate implements RecordableProperty {
 
     @Override
     public String toString() {
-        return changeset.getDateTime();
+        return changeset.getFormattedDateTime();
     }
 }

@@ -1,11 +1,12 @@
 package domain;
 
-import com.aragost.javahg.Changeset;
 import com.aragost.javahg.DateTime;
+import domain.repo.Changeset;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import java.time.Instant;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -26,14 +27,13 @@ public class PreviousTagsTest {
         changeset = Mockito.mock(Changeset.class);
         Changeset firstChild = Mockito.mock(Changeset.class);
         Changeset secondChild = Mockito.mock(Changeset.class);
-        when(changeset.getParent1()).thenReturn(firstChild);
-        when(firstChild.getParent1()).thenReturn(secondChild);
-        DateTime dateTime = Mockito.mock(DateTime.class);
-        when(dateTime.getDate()).thenReturn(new Date());
-        when(changeset.getTimestamp()).thenReturn(dateTime);
-        when(firstChild.getTimestamp()).thenReturn(dateTime);
+        when(changeset.getLeftParent()).thenReturn(firstChild);
+        when(firstChild.getRightParent()).thenReturn(secondChild);
+        Instant dateTime = Instant.now();
+        when(changeset.getDateTime()).thenReturn(dateTime);
+        when(firstChild.getDateTime()).thenReturn(dateTime);
         when(secondChild.tags()).thenReturn(expectedTags);
-        when(secondChild.getTimestamp()).thenReturn(dateTime);
+        when(secondChild.getDateTime()).thenReturn(dateTime);
     }
 
     @Test
