@@ -1,6 +1,7 @@
 package domain;
 
-import com.aragost.javahg.Changeset;
+
+import domain.repo.Changeset;
 
 import java.util.Properties;
 
@@ -19,6 +20,6 @@ public class Revision implements RecordableProperty {
 
     @Override
     public String toString() {
-        return String.valueOf(changeset.getRevision());
+        return changeset.getRevision();
     }
 }

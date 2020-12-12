@@ -65,4 +65,9 @@ public class JavaHgChangeset implements Changeset {
     public List<String> tags() {
         return delegate.tags();
     }
+
+    @Override
+    public String getRevision() {
+        return String.valueOf(delegate.getRevision());
+    }
 }

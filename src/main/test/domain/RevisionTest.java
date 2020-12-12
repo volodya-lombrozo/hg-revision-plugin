@@ -1,6 +1,6 @@
 package domain;
 
-import com.aragost.javahg.Changeset;
+import domain.repo.Changeset;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -19,7 +19,7 @@ public class RevisionTest {
     public void setUp() {
         changeset = Mockito.mock(Changeset.class);
         expected = "1";
-        when(changeset.getRevision()).thenReturn(Integer.parseInt(expected));
+        when(changeset.getRevision()).thenReturn(expected);
     }
 
     @Test

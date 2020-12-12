@@ -22,4 +22,6 @@ public interface Changeset {
     String getNode();
 
     List<String> tags();
+
+    String getRevision();
 }
