@@ -1,10 +1,7 @@
 package domain;
 
-import domain.repo.JavaHgChangeset;
-import domain.repo.JavaHgRepository;
 import domain.repo.Repository;
 import domain.repo.Changeset;
-import service.changeset.CurrentChangeSet;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,7 +29,7 @@ public class RepositoryInfo {
     }
 
     private List<RecordableProperty> allRepoProperties() {
-        Changeset changeset = new CurrentChangeSet(repository).toChangeSet();
+        Changeset changeset = repository.currentChangeset();
         RecordableProperty author = new Author(changeset);
         RecordableProperty branch = new Branch(changeset);
         RecordableProperty commitDate = new CommitDate(changeset);
