@@ -1,5 +1,6 @@
 package domain;
 
+import domain.command.ExecuteException;
 import domain.repo.Repository;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +18,7 @@ public class BookmarksTest {
     private String expected;
 
     @Before
-    public void setUp() {
+    public void setUp() throws ExecuteException {
         repository = Mockito.mock(Repository.class);
         expected = "Bookmarks";
         when(repository.bookmarks()).thenReturn(Collections.singletonList(expected));

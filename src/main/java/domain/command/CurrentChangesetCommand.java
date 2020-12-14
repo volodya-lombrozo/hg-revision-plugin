@@ -1,14 +1,14 @@
 package domain.command;
 
-public class CurrentChangeset implements Command {
+public class CurrentChangesetCommand implements Command {
 
     private final Command delegate;
 
-    public CurrentChangeset(String repoPath) {
+    public CurrentChangesetCommand(String repoPath) {
         this(new HgCommand(repoPath, "hg", "log", "-r", ".", "--template", "\"user:'{author}'\nbranch:'{branch}'\ndate:'{date}'\nmessage:'{desc}'\nnode:'{node}'\nrev:'{rev}'\ntags:'{tags}'\nparents:{parents}\""));
     }
 
-    public CurrentChangeset(Command delegate) {
+    public CurrentChangesetCommand(Command delegate) {
         this.delegate = delegate;
     }
 

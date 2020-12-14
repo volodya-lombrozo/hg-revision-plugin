@@ -5,6 +5,7 @@ import domain.command.OutputProperty;
 import java.time.Instant;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class CommandLineChangeset implements Changeset {
 
@@ -66,6 +67,19 @@ public class CommandLineChangeset implements Changeset {
     @Override
     public String getRevision() {
         return new OutputProperty(commandOutput, "rev").property();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CommandLineChangeset that = (CommandLineChangeset) o;
+        return Objects.equals(commandOutput, that.commandOutput);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(commandOutput);
     }
 
     @Override

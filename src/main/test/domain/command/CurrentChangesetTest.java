@@ -4,7 +4,6 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import static org.junit.Assert.*;
-import static org.mockito.Matchers.booleanThat;
 import static org.mockito.Mockito.when;
 
 public class CurrentChangesetTest {
@@ -12,7 +11,7 @@ public class CurrentChangesetTest {
     @Test
     public void execute() throws ExecuteException {
         Command delegate = Mockito.mock(Command.class);
-        CurrentChangeset changeset = new CurrentChangeset(delegate);
+        CurrentChangesetCommand changeset = new CurrentChangesetCommand(delegate);
         String expected = "expected";
         when(delegate.execute()).thenReturn(expected);
 
@@ -23,7 +22,7 @@ public class CurrentChangesetTest {
 
     @Test
     public void defaultConstructor() {
-        CurrentChangeset changeset = new CurrentChangeset("/some/path");
+        CurrentChangesetCommand changeset = new CurrentChangesetCommand("/some/path");
 
         boolean isNotNullDelegate = changeset.isNotNullDelegate();
 

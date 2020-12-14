@@ -1,5 +1,6 @@
 package domain;
 
+import domain.command.ExecuteException;
 import domain.repo.Repository;
 
 import java.util.List;
@@ -20,7 +21,11 @@ public class Bookmarks implements RecordableProperty {
 
     @Override
     public String toString() {
-        List<String> bookmarks = repository.bookmarks();
-        return String.join(";", bookmarks);
+        try {
+            List<String> bookmarks = repository.bookmarks();
+            return String.join(";", bookmarks);
+        } catch (ExecuteException e) {
+            throw new RuntimeException("Can't parse bookmarks", e);
+        }
     }
 }
