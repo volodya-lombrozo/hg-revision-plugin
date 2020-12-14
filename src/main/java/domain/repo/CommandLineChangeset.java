@@ -1,6 +1,6 @@
 package domain.repo;
 
-import domain.command.OutputProperties;
+import domain.command.OutputProperty;
 
 import java.time.Instant;
 import java.util.Arrays;
@@ -20,17 +20,17 @@ public class CommandLineChangeset implements Changeset {
 
     @Override
     public String getUser() {
-        return new OutputProperties(commandOutput).property("user");
+        return new OutputProperty(commandOutput, "user").property();
     }
 
     @Override
     public String getBranch() {
-        return new OutputProperties(commandOutput).property("branch");
+        return new OutputProperty(commandOutput, "branch").property();
     }
 
     @Override
     public String getFormattedDateTime() {
-        return new OutputProperties(commandOutput).property("date");
+        return new OutputProperty(commandOutput, "date").property();
     }
 
     @Override
@@ -50,22 +50,22 @@ public class CommandLineChangeset implements Changeset {
 
     @Override
     public String getMessage() {
-        return new OutputProperties(commandOutput).property("desc");
+        return new OutputProperty(commandOutput, "desc").property();
     }
 
     @Override
     public String getNode() {
-        return new OutputProperties(commandOutput).property("node");
+        return new OutputProperty(commandOutput, "node").property();
     }
 
     @Override
     public List<String> tags() {
-        return Arrays.asList(new OutputProperties(commandOutput).property("tags").split(" ").clone());
+        return Arrays.asList(new OutputProperty(commandOutput, "tags").property().split(" ").clone());
     }
 
     @Override
     public String getRevision() {
-        return new OutputProperties(commandOutput).property("rev");
+        return new OutputProperty(commandOutput, "rev").property();
     }
 
     @Override
