@@ -15,10 +15,11 @@ public class CommandLineRepositoryTest {
     @Test
 //    @Ignore("for manual testing only")
     public void integrationTest(){
-        CommandLineRepository repository = new CommandLineRepository();
+        CommandLineRepository repository = new CommandLineRepository("D:\\workspace\\hg_repo");
 
         Changeset changeset = repository.currentChangeset();
 
-        assertNull(changeset);
+        System.out.println(changeset);
+        assertNotNull(changeset);
     }
 }
