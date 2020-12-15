@@ -1,5 +1,6 @@
 package domain.command;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -22,7 +23,8 @@ public class HgCommand implements Command {
     @Override
     public String execute() throws ExecuteException {
         try {
-            processBuilder.directory(Paths.get(repoPath).toFile());
+            File file = Paths.get(repoPath).toFile();
+            processBuilder.directory(file);
             Process process = processBuilder.start();
             String output = new InputString(process.getInputStream()).read();
             int exitCode = process.waitFor();
@@ -37,7 +39,7 @@ public class HgCommand implements Command {
     public String toString() {
         return "CurrentChangeset{" +
                 "repoPath='" + repoPath + '\'' +
-                ", command=" + Arrays.toString(command) +
+                ", command=[" + String.join(" ", command) + "]" +
                 '}';
     }
 }

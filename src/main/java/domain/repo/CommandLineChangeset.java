@@ -85,8 +85,6 @@ public class CommandLineChangeset implements Changeset {
                 ", branch='" + getBranch() + '\'' +
                 ", formattedDateTime='" + getFormattedDateTime() + '\'' +
                 ", dateTime=" + getDateTime() +
-                ", leftParent=" + getLeftParent() +
-                ", rightParent=" + getRightParent() +
                 ", message='" + getMessage() + '\'' +
                 ", node='" + getNode() + '\'' +
                 ", tags=" + tags() +
