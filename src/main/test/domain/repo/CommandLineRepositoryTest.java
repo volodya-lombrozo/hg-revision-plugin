@@ -62,4 +62,5 @@ public class CommandLineRepositoryTest {
         System.out.println(changeset);
         assertNotNull(changeset);
     }
+
 }

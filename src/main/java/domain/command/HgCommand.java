@@ -3,7 +3,6 @@ package domain.command;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.Arrays;
 
 public class HgCommand implements Command {
     private final String repoPath;
@@ -11,7 +10,7 @@ public class HgCommand implements Command {
     private final ProcessFactory processBuilder;
 
     public HgCommand(String repoPath, String... command) {
-        this(repoPath, new JavaProcessFactory(repoPath), command);
+        this(repoPath, new JavaProcessFactory(command), command);
     }
 
     public HgCommand(String repoPath, ProcessFactory processBuilder, String... command) {

@@ -6,8 +6,8 @@ import java.io.IOException;
 public class JavaProcessFactory implements ProcessFactory {
     private final ProcessBuilder delegate;
 
-    public JavaProcessFactory(String repoPath) {
-        this(new ProcessBuilder(repoPath));
+    public JavaProcessFactory(String[] command) {
+        this(new ProcessBuilder(command));
     }
 
     public JavaProcessFactory(ProcessBuilder delegate) {

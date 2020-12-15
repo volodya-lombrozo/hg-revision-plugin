@@ -3,7 +3,8 @@ package domain.repo;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class CommandLineChangesetTest {
 
@@ -45,4 +46,6 @@ public class CommandLineChangesetTest {
 
         assertNotEquals(0, hashCode);
     }
+
+
 }
