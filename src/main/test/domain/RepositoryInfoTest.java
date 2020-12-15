@@ -1,5 +1,6 @@
 package domain;
 
+import domain.command.ExecuteException;
 import domain.repo.Changeset;
 import domain.repo.Repository;
 import org.junit.Before;
@@ -20,7 +21,7 @@ public class RepositoryInfoTest {
     Repository repository;
 
     @Before
-    public void setUp() {
+    public void setUp() throws ExecuteException {
         repository = Mockito.mock(Repository.class);
         Changeset changeset = Mockito.mock(Changeset.class);
         when(repository.currentChangeset()).thenReturn(changeset);
@@ -37,7 +38,7 @@ public class RepositoryInfoTest {
     }
 
     @Test
-    public void fillPropertiesTest() {
+    public void fillPropertiesTest() throws ExecuteException {
         RepositoryInfo info = new RepositoryInfo(repository);
         Properties properties = new Properties();
 

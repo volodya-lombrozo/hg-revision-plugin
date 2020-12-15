@@ -1,5 +1,6 @@
 import com.aragost.javahg.Repository;
 import domain.RepositoryInfo;
+import domain.command.ExecuteException;
 import domain.repo.JavaHgRepository;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -13,7 +14,7 @@ import static org.junit.Assert.assertNotNull;
 public class ScanTest {
 
     @Test
-    public void currentChangeSetTest() {
+    public void currentChangeSetTest() throws ExecuteException {
         String pathname = "D:\\workspace\\hg_repo"; //put your path here
         Repository repository = Repository.open(new File(pathname));
 

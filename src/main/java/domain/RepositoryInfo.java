@@ -1,5 +1,6 @@
 package domain;
 
+import domain.command.ExecuteException;
 import domain.repo.Repository;
 import domain.repo.Changeset;
 
@@ -18,7 +19,7 @@ public class RepositoryInfo {
         this.repository = repository;
     }
 
-    public void fillProperties(Properties properties) {
+    public void fillProperties(Properties properties) throws ExecuteException {
         setWarningLogLevel();
         allRepoProperties().forEach(item -> item.fillProperties(properties));
     }
@@ -28,7 +29,7 @@ public class RepositoryInfo {
         logger.setLevel(Level.WARNING);
     }
 
-    private List<RecordableProperty> allRepoProperties() {
+    private List<RecordableProperty> allRepoProperties() throws ExecuteException {
         Changeset changeset = repository.currentChangeset();
         RecordableProperty author = new Author(changeset);
         RecordableProperty branch = new Branch(changeset);
@@ -51,11 +52,15 @@ public class RepositoryInfo {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        allRepoProperties().forEach(item -> sb.append(item.getClass().getName())
-                .append(":")
-                .append(item.toString())
-                .append("\n"));
-        return sb.toString();
+        try {
+            StringBuilder sb = new StringBuilder();
+            allRepoProperties().forEach(item -> sb.append(item.getClass().getName())
+                    .append(":")
+                    .append(item.toString())
+                    .append("\n"));
+            return sb.toString();
+        } catch (ExecuteException e) {
+            throw new RuntimeException("Fatal exception during converting RepositoryInfo with repository: " + repository + " to String", e);
+        }
     }
 }

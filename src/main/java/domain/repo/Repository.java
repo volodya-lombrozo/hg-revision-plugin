@@ -8,5 +8,5 @@ public interface Repository {
 
     List<String> bookmarks() throws ExecuteException;
 
-    Changeset currentChangeset();
+    Changeset currentChangeset() throws ExecuteException;
 }

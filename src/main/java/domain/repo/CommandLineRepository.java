@@ -31,13 +31,12 @@ public class CommandLineRepository implements Repository {
     }
 
     @Override
-    public Changeset currentChangeset() {
-        try {
-            String output = changesetCommand.execute();
-            return new CommandLineChangeset(output);
-        } catch (ExecuteException e) {
-            e.printStackTrace();
-            return CommandLineChangeset.undefined();
-        }
+    public Changeset currentChangeset() throws ExecuteException {
+        String output = changesetCommand.execute();
+        return new CommandLineChangeset(output);
+    }
+
+    public boolean notEmptyCommands() {
+        return changesetCommand != null && bookmarksCommand != null;
     }
 }
