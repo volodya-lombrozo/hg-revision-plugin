@@ -6,6 +6,8 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
@@ -14,7 +16,7 @@ public class CommandLineRepositoryTest {
     @Test
     public void currentChangeset() throws ExecuteException {
         Command changesetCommand = Mockito.mock(Command.class);
-        Repository repo = new CommandLineRepository(changesetCommand, changesetCommand);
+        Repository repo = new CommandLineRepository(changesetCommand, null);
         String commandOutput = "user:'author'";
         Changeset expected = new CommandLineChangeset(commandOutput);
         when(changesetCommand.execute()).thenReturn(commandOutput);
@@ -25,11 +27,26 @@ public class CommandLineRepositoryTest {
         assertEquals(expected, acutal);
     }
 
+    @Test
+    public void bookmarks() throws ExecuteException {
+        Command bookmarksCommand = Mockito.mock(Command.class);
+        CommandLineRepository repo = new CommandLineRepository(null, bookmarksCommand);
+        String first = "first";
+        String second = "second";
+        when(bookmarksCommand.execute()).thenReturn(first + "\n" + second);
+
+        List<String> bookmarks = repo.bookmarks();
+
+        assertEquals(2, bookmarks.size());
+        assertTrue(bookmarks.contains(first));
+        assertTrue(bookmarks.contains(second));
+    }
+
 
     @Test
     @Ignore("for manual testing only")
     public void integrationTest() {
-        CommandLineRepository repository = new CommandLineRepository("D:\\workspace\\hg_repo");
+        CommandLineRepository repository = new CommandLineRepository("D:\\workspace\\hg_repo"); //pass your path there
 
         Changeset changeset = repository.currentChangeset();
 

@@ -1,11 +1,13 @@
 package domain.repo;
 
+import domain.command.AllRepositoryBookmarksCommand;
 import domain.command.Command;
 import domain.command.CurrentChangesetCommand;
 import domain.command.ExecuteException;
 
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CommandLineRepository implements Repository {
 
@@ -13,7 +15,7 @@ public class CommandLineRepository implements Repository {
     private final Command bookmarksCommand;
 
     public CommandLineRepository(String repoPath) {
-        this(new CurrentChangesetCommand(repoPath), null);
+        this(new CurrentChangesetCommand(repoPath), new AllRepositoryBookmarksCommand(repoPath));
     }
 
     public CommandLineRepository(Command changesetCommand, Command bookmarksCommand) {
@@ -23,7 +25,9 @@ public class CommandLineRepository implements Repository {
 
     @Override
     public List<String> bookmarks() throws ExecuteException {
-        return Collections.singletonList(bookmarksCommand.execute());
+        String bookmarksArray = bookmarksCommand.execute();
+        String[] split = bookmarksArray.split("\n");
+        return Arrays.stream(split).map(String::trim).collect(Collectors.toList());
     }
 
     @Override
