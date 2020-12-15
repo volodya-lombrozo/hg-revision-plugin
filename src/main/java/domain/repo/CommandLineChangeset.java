@@ -9,10 +9,6 @@ import java.util.Objects;
 
 public class CommandLineChangeset implements Changeset {
 
-    public static CommandLineChangeset undefined() {
-        return new Undefined();
-    }
-
     private final String commandOutput;
 
     public CommandLineChangeset(String commandOutput) {
@@ -98,59 +94,4 @@ public class CommandLineChangeset implements Changeset {
                 '}';
     }
 
-    private static class Undefined extends CommandLineChangeset {
-        public Undefined() {
-            super("");
-        }
-
-        @Override
-        public String getUser() {
-            throw new UnsupportedOperationException("Method 'getUser' doesn't implemented");
-        }
-
-        @Override
-        public String getBranch() {
-            throw new UnsupportedOperationException("Method 'getBranch' doesn't implemented");
-        }
-
-        @Override
-        public String getFormattedDateTime() {
-            throw new UnsupportedOperationException("Method 'getFormattedDateTime' doesn't implemented");
-        }
-
-        @Override
-        public Instant getDateTime() {
-            throw new UnsupportedOperationException("Method 'getDateTime' doesn't implemented");
-        }
-
-        @Override
-        public Changeset getLeftParent() {
-            throw new UnsupportedOperationException("Method 'getLeftParent' doesn't implemented");
-        }
-
-        @Override
-        public Changeset getRightParent() {
-            throw new UnsupportedOperationException("Method 'getRightParent' doesn't implemented");
-        }
-
-        @Override
-        public String getMessage() {
-            throw new UnsupportedOperationException("Method 'getMessage' doesn't implemented");
-        }
-
-        @Override
-        public String getNode() {
-            throw new UnsupportedOperationException("Method 'getNode' doesn't implemented");
-        }
-
-        @Override
-        public List<String> tags() {
-            throw new UnsupportedOperationException("Method 'tags' doesn't implemented");
-        }
-
-        @Override
-        public String getRevision() {
-            throw new UnsupportedOperationException("Method 'getRevision' doesn't implemented");
-        }
-    }
 }

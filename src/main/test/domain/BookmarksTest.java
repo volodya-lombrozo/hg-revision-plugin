@@ -44,4 +44,16 @@ public class BookmarksTest {
 
         assertEquals(expected, actual);
     }
+
+
+    @Test(expected = RuntimeException.class)
+    public void testToString_fail() throws ExecuteException {
+        Repository failedRepo = Mockito.mock(Repository.class);
+        RecordableProperty bookmarks = new Bookmarks(failedRepo);
+        when(failedRepo.bookmarks()).thenThrow(new ExecuteException("Some execute exception"));
+
+        String actual = bookmarks.toString();
+
+        fail(actual + " bookmarks should not be presented");
+    }
 }
