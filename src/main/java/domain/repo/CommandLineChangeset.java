@@ -4,6 +4,7 @@ import domain.command.ExecuteException;
 import domain.command.OutputProperty;
 import util.FormattedDateTime;
 import util.HgDateTime;
+import util.Parents;
 import util.exceptions.ParentSearchException;
 
 import java.time.Instant;
@@ -46,27 +47,21 @@ public class CommandLineChangeset implements Changeset {
         return new HgDateTime(rawDate).toInstant();
     }
 
-    //fixme: ugly realization
     @Override
     public Changeset getLeftParent() {
         try {
-            String[] split = parents().trim().split(" ");
-            if (split.length > 0)
-                return repository.findChangeset(split[0]);
-            else return null;
+            String rev = new Parents(parents()).left();
+            return repository.findChangeset(rev);
         } catch (ExecuteException ex) {
             throw new ParentSearchException("Exception occurred during searching of left parent. Changeset " + this, ex);
         }
     }
 
-    //fixme: ugly realization
     @Override
     public Changeset getRightParent() {
         try {
-            String[] split = parents().trim().split(" ");
-            if (split.length > 1)
-                return repository.findChangeset(split[1]);
-            else return null;
+            String rev = new Parents(parents()).right();
+            return repository.findChangeset(rev);
         } catch (ExecuteException ex) {
             throw new ParentSearchException("Exception occurred during searching of right parent. Changeset " + this, ex);
         }

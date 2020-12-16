@@ -2,6 +2,8 @@ package domain.repo;
 
 import domain.command.Command;
 import domain.command.ExecuteException;
+import domain.command.FindChangesetCommand;
+import domain.command.ParameterizedCommand;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -16,7 +18,7 @@ public class CommandLineRepositoryTest {
     @Test
     public void currentChangeset() throws ExecuteException {
         Command changesetCommand = Mockito.mock(Command.class);
-        Repository repo = new CommandLineRepository(changesetCommand, new Command.FakeCommand(), new Command.FakeCommand());
+        Repository repo = new CommandLineRepository(changesetCommand, new Command.FakeCommand(), new ParameterizedCommand.Fake());
         String commandOutput = "user:'author'";
         Changeset expected = new CommandLineChangeset(commandOutput);
         when(changesetCommand.execute()).thenReturn(commandOutput);
@@ -30,7 +32,7 @@ public class CommandLineRepositoryTest {
     @Test
     public void bookmarks() throws ExecuteException {
         Command bookmarksCommand = Mockito.mock(Command.class);
-        CommandLineRepository repo = new CommandLineRepository(new Command.FakeCommand(), bookmarksCommand, new Command.FakeCommand());
+        CommandLineRepository repo = new CommandLineRepository(new Command.FakeCommand(), bookmarksCommand, new ParameterizedCommand.Fake());
         String first = "first";
         String second = "second";
         when(bookmarksCommand.execute()).thenReturn(first + "\n" + second);
@@ -45,7 +47,7 @@ public class CommandLineRepositoryTest {
 
     @Test
     public void findChangeset() throws ExecuteException {
-        Command findChangesetCommand = Mockito.mock(Command.class);
+        ParameterizedCommand findChangesetCommand = Mockito.mock(ParameterizedCommand.class);
         CommandLineRepository repo = new CommandLineRepository(new Command.FakeCommand(), new Command.FakeCommand(), findChangesetCommand);
         String hgResponse = "";
         when(findChangesetCommand.execute()).thenReturn(hgResponse);

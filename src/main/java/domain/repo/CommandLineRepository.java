@@ -10,13 +10,13 @@ public class CommandLineRepository implements Repository {
 
     private final Command currentChangesetCommand;
     private final Command bookmarksCommand;
-    private final Command findChangesetCommand;
+    private final ParameterizedCommand findChangesetCommand;
 
     public CommandLineRepository(String repoPath) {
         this(new CurrentChangesetCommand(repoPath), new AllRepositoryBookmarksCommand(repoPath), new FindChangesetCommand(repoPath));
     }
 
-    public CommandLineRepository(Command changesetCommand, Command bookmarksCommand, Command findChangesetCommand) {
+    public CommandLineRepository(Command changesetCommand, Command bookmarksCommand, ParameterizedCommand findChangesetCommand) {
         this.currentChangesetCommand = changesetCommand;
         this.bookmarksCommand = bookmarksCommand;
         this.findChangesetCommand = findChangesetCommand;
@@ -37,7 +37,7 @@ public class CommandLineRepository implements Repository {
 
     @Override
     public Changeset findChangeset(String rev) throws ExecuteException {
-        return new CommandLineChangeset(findChangesetCommand.execute(), this);
+        return new CommandLineChangeset(findChangesetCommand.execute());
     }
 
     public boolean notEmptyCommands() {

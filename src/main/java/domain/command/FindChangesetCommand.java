@@ -1,23 +1,31 @@
 package domain.command;
 
-public class FindChangesetCommand implements Command {
+import java.util.function.Function;
 
-    private final Command delegate;
+public class FindChangesetCommand implements ParameterizedCommand {
+
+    private final Function<String, Command> commandFactory;
 
     public FindChangesetCommand(String repoPath) {
-        this(new HgCommand(repoPath, "hg", "log", "-r", ".", "--template", "user:'{author}'\nbranch:'{branch}'\ndate:'{date|isodate}'\nmessage:'{desc}'\nnode:'{node}'\nrev:'{rev}'\ntags:'{tags}'\nparents:'{parents}'"));
+        this(rev -> new HgCommand(repoPath, "hg", "log", "-r", rev, "--template", "user:'{author}'\nbranch:'{branch}'\ndate:'{date|isodate}'\nmessage:'{desc}'\nnode:'{node}'\nrev:'{rev}'\ntags:'{tags}'\nparents:'{parents}'"));
     }
 
-    public FindChangesetCommand(Command delegate) {
-        this.delegate = delegate;
+    public FindChangesetCommand(Function<String, Command> commandFactory) {
+        this.commandFactory = commandFactory;
     }
 
     @Override
-    public String execute() throws ExecuteException {
-        return delegate.execute();
+    public String execute(String... params) throws ExecuteException {
+        if (params == null || params.length == 0)
+            throw new ExecuteException("For command " + this + " you should pass one param: revision");
+        String rev = params[0];
+        Command command = commandFactory.apply(rev);
+        return command.execute();
     }
 
-    public boolean isNotNullDelegate() {
-        return delegate != null;
+    public boolean commandFactoryIsInstalled() {
+        return commandFactory != null;
     }
+
+
 }
