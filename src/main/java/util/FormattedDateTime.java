@@ -24,7 +24,7 @@ public class FormattedDateTime {
 
     @Override
     public String toString() {
-        if (instant == null) return "";
+        if (instant == null || instant.equals(Instant.MIN)) return "";
         else return formatter.format(instant.atZone(ZoneId.systemDefault()));
     }
 }

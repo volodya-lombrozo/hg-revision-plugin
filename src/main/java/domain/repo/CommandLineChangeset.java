@@ -1,8 +1,10 @@
 package domain.repo;
 
+import domain.command.ExecuteException;
 import domain.command.OutputProperty;
 import util.FormattedDateTime;
 import util.HgDateTime;
+import util.exceptions.ParentSearchException;
 
 import java.time.Instant;
 import java.util.Arrays;
@@ -12,9 +14,15 @@ import java.util.Objects;
 public class CommandLineChangeset implements Changeset {
 
     private final String commandOutput;
+    private final Repository repository;
 
     public CommandLineChangeset(String commandOutput) {
+        this(commandOutput, new FakeRepository());
+    }
+
+    public CommandLineChangeset(String commandOutput, Repository repository) {
         this.commandOutput = commandOutput;
+        this.repository = repository;
     }
 
     @Override
@@ -38,14 +46,30 @@ public class CommandLineChangeset implements Changeset {
         return new HgDateTime(rawDate).toInstant();
     }
 
+    //fixme: ugly realization
     @Override
     public Changeset getLeftParent() {
-        return null;
+        try {
+            String[] split = parents().trim().split(" ");
+            if (split.length > 0)
+                return repository.findChangeset(split[0]);
+            else return null;
+        } catch (ExecuteException ex) {
+            throw new ParentSearchException("Exception occurred during searching of left parent. Changeset " + this, ex);
+        }
     }
 
+    //fixme: ugly realization
     @Override
     public Changeset getRightParent() {
-        return null;
+        try {
+            String[] split = parents().trim().split(" ");
+            if (split.length > 1)
+                return repository.findChangeset(split[1]);
+            else return null;
+        } catch (ExecuteException ex) {
+            throw new ParentSearchException("Exception occurred during searching of right parent. Changeset " + this, ex);
+        }
     }
 
     @Override
@@ -67,6 +91,11 @@ public class CommandLineChangeset implements Changeset {
     public String getRevision() {
         return new OutputProperty(commandOutput, "rev").property();
     }
+
+    private String parents() {
+        return new OutputProperty(commandOutput, "parents").property().trim();
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -92,6 +121,7 @@ public class CommandLineChangeset implements Changeset {
                 ", node='" + getNode() + '\'' +
                 ", tags=" + tags() +
                 ", revision='" + getRevision() + '\'' +
+                ", parents='" + parents() + "'" +
                 '}';
     }
 

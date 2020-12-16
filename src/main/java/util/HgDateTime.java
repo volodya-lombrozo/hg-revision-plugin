@@ -18,6 +18,7 @@ public class HgDateTime {
     }
 
     public Instant toInstant() {
+        if (raw == null || raw.isEmpty()) return Instant.MIN;
         return ZonedDateTime.parse(raw, formatter).toInstant();
     }
 }

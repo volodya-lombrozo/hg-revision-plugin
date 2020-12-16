@@ -9,4 +9,6 @@ public interface Repository {
     List<String> bookmarks() throws ExecuteException;
 
     Changeset currentChangeset() throws ExecuteException;
+
+    Changeset findChangeset(String rev) throws ExecuteException;
 }

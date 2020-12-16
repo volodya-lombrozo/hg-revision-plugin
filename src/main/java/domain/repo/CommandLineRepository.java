@@ -1,9 +1,6 @@
 package domain.repo;
 
-import domain.command.AllRepositoryBookmarksCommand;
-import domain.command.Command;
-import domain.command.CurrentChangesetCommand;
-import domain.command.ExecuteException;
+import domain.command.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,16 +8,18 @@ import java.util.stream.Collectors;
 
 public class CommandLineRepository implements Repository {
 
-    private final Command changesetCommand;
+    private final Command currentChangesetCommand;
     private final Command bookmarksCommand;
+    private final Command findChangesetCommand;
 
     public CommandLineRepository(String repoPath) {
-        this(new CurrentChangesetCommand(repoPath), new AllRepositoryBookmarksCommand(repoPath));
+        this(new CurrentChangesetCommand(repoPath), new AllRepositoryBookmarksCommand(repoPath), new FindChangesetCommand(repoPath));
     }
 
-    public CommandLineRepository(Command changesetCommand, Command bookmarksCommand) {
-        this.changesetCommand = changesetCommand;
+    public CommandLineRepository(Command changesetCommand, Command bookmarksCommand, Command findChangesetCommand) {
+        this.currentChangesetCommand = changesetCommand;
         this.bookmarksCommand = bookmarksCommand;
+        this.findChangesetCommand = findChangesetCommand;
     }
 
     @Override
@@ -32,11 +31,16 @@ public class CommandLineRepository implements Repository {
 
     @Override
     public Changeset currentChangeset() throws ExecuteException {
-        String output = changesetCommand.execute();
-        return new CommandLineChangeset(output);
+        String output = currentChangesetCommand.execute();
+        return new CommandLineChangeset(output, this);
+    }
+
+    @Override
+    public Changeset findChangeset(String rev) throws ExecuteException {
+        return new CommandLineChangeset(findChangesetCommand.execute(), this);
     }
 
     public boolean notEmptyCommands() {
-        return changesetCommand != null && bookmarksCommand != null;
+        return currentChangesetCommand != null && bookmarksCommand != null;
     }
 }
