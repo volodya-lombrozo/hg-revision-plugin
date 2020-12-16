@@ -27,5 +27,10 @@ public class FindChangesetCommand implements ParameterizedCommand {
         return commandFactory != null;
     }
 
-
+    @Override
+    public String toString() {
+        return "FindChangesetCommand{" +
+                "commandFactory=" + commandFactory +
+                '}';
+    }
 }

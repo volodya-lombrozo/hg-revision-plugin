@@ -37,7 +37,7 @@ public class CommandLineRepository implements Repository {
 
     @Override
     public Changeset findChangeset(String rev) throws ExecuteException {
-        return new CommandLineChangeset(findChangesetCommand.execute());
+        return new CommandLineChangeset(findChangesetCommand.execute(rev));
     }
 
     public boolean notEmptyCommands() {

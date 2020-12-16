@@ -2,8 +2,7 @@ package domain.command;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class FindChangesetCommandTest {
 
@@ -23,6 +22,17 @@ public class FindChangesetCommandTest {
         FindChangesetCommand command = new FindChangesetCommand(repoPath);
 
         assertTrue(command.commandFactoryIsInstalled());
+    }
+
+
+    @Test(expected = ExecuteException.class)
+    public void emptyParam() throws ExecuteException {
+        String[] empty = new String[0];
+        FindChangesetCommand command = new FindChangesetCommand("/some/path");
+
+        command.execute(empty);
+
+        fail();
     }
 
 }

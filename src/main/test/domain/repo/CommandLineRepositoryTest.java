@@ -50,7 +50,7 @@ public class CommandLineRepositoryTest {
         ParameterizedCommand findChangesetCommand = Mockito.mock(ParameterizedCommand.class);
         CommandLineRepository repo = new CommandLineRepository(new Command.FakeCommand(), new Command.FakeCommand(), findChangesetCommand);
         String hgResponse = "";
-        when(findChangesetCommand.execute()).thenReturn(hgResponse);
+        when(findChangesetCommand.execute("")).thenReturn(hgResponse);
         Changeset expected = new CommandLineChangeset(hgResponse);
 
         Changeset actual = repo.findChangeset("");

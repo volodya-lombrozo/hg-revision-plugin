@@ -49,21 +49,21 @@ public class CommandLineChangeset implements Changeset {
 
     @Override
     public Changeset getLeftParent() {
+        String rev = new Parents(parents()).left();
         try {
-            String rev = new Parents(parents()).left();
             return repository.findChangeset(rev);
         } catch (ExecuteException ex) {
-            throw new ParentSearchException("Exception occurred during searching of left parent. Changeset " + this, ex);
+            throw new ParentSearchException("Exception occurred during searching of left parent: " + rev + ". Changeset " + this, ex);
         }
     }
 
     @Override
     public Changeset getRightParent() {
+        String rev = new Parents(parents()).right();
         try {
-            String rev = new Parents(parents()).right();
             return repository.findChangeset(rev);
         } catch (ExecuteException ex) {
-            throw new ParentSearchException("Exception occurred during searching of right parent. Changeset " + this, ex);
+            throw new ParentSearchException("Exception occurred during searching of right parent: " + rev + ". Changeset " + this, ex);
         }
     }
 

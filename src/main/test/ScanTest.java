@@ -35,8 +35,12 @@ public class ScanTest {
         CommandLineRepository repository = new CommandLineRepository("D:\\workspace\\hg_repo"); //pass your path there
 
         Changeset changeset = repository.currentChangeset();
+        Changeset leftParent = changeset.getLeftParent();
+        Changeset rightParent = changeset.getRightParent();
 
-        System.out.println(changeset);
+        System.out.println("Child: " + changeset);
+        System.out.println("Left parent: " + leftParent);
+        System.out.println("Right parent: " + rightParent);
         assertNotNull(changeset);
     }
 
