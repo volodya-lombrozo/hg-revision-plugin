@@ -24,9 +24,8 @@ public class OutputProperty {
     }
 
     private String value(String raw) {
-        String properyDelimiter = "'";
-        int start = raw.indexOf(properyDelimiter);
-        int end = raw.lastIndexOf(properyDelimiter);
+        int start = raw.indexOf("'");
+        int end = raw.lastIndexOf("'");
         return raw.substring(start + 1, end);
     }
 

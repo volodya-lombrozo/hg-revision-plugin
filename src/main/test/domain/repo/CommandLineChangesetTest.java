@@ -1,7 +1,8 @@
 package domain.repo;
 
-import org.junit.Ignore;
 import org.junit.Test;
+import util.FormattedDateTime;
+import util.HgDateTime;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -9,11 +10,10 @@ import static org.junit.Assert.assertNotEquals;
 public class CommandLineChangesetTest {
 
     @Test
-    @Ignore("Not worked")
     public void toStringTest() {
         String author = "author";
         String branch = "branch";
-        String date = "12.12.2012";
+        String date = "2020-10-19 11:53 +0300";
         String message = "message";
         String node = "node";
         String tags = "a b";
@@ -22,7 +22,7 @@ public class CommandLineChangesetTest {
                 "user:" + "'" + author + "'\n" +
                         "branch:" + "'" + branch + "'\n" +
                         "date:" + "'" + date + "'\n" +
-                        "desc:" + "'" + message + "'\n" +
+                        "message:" + "'" + message + "'\n" +
                         "node:" + "'" + node + "'\n" +
                         "tags:" + "'" + tags + "'\n" +
                         "revision:" + "'" + revision + "'\n"
@@ -30,10 +30,11 @@ public class CommandLineChangesetTest {
 
         String actual = changeset.toString();
 
-        String expectedFormattedDate = "";
+        String expectedDate = new HgDateTime(date).toInstant().toString();
+        String expectedFormattedDate = new FormattedDateTime(new HgDateTime(date).toInstant()).toString();
         String expectedTags = tags.replace(" ", ", ");
         String expected = "CommandLineChangeset{user='" + author + "', branch='" + branch + "', " +
-                "formattedDateTime='" + expectedFormattedDate + "', dateTime='" + date + "', message='" + message + "'," +
+                "formattedDateTime='" + expectedFormattedDate + "', dateTime='" + expectedDate + "', message='" + message + "'," +
                 " node='" + node + "', tags=[" + expectedTags + "], revision='" + revision + "'}";
         assertEquals(expected, actual);
     }

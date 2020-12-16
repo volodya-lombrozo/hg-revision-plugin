@@ -51,16 +51,4 @@ public class CommandLineRepositoryTest {
         assertTrue(notEmptyCommands);
     }
 
-
-    @Test
-    @Ignore("for manual testing only")
-    public void integrationTest() throws ExecuteException {
-        CommandLineRepository repository = new CommandLineRepository("D:\\workspace\\hg_repo"); //pass your path there
-
-        Changeset changeset = repository.currentChangeset();
-
-        System.out.println(changeset);
-        assertNotNull(changeset);
-    }
-
 }

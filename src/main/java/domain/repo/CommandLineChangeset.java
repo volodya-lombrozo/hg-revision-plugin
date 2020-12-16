@@ -1,6 +1,8 @@
 package domain.repo;
 
 import domain.command.OutputProperty;
+import util.FormattedDateTime;
+import util.HgDateTime;
 
 import java.time.Instant;
 import java.util.Arrays;
@@ -27,12 +29,13 @@ public class CommandLineChangeset implements Changeset {
 
     @Override
     public String getFormattedDateTime() {
-        return new OutputProperty(commandOutput, "date").property();
+        return new FormattedDateTime(getDateTime()).toString();
     }
 
     @Override
     public Instant getDateTime() {
-        return null;
+        String rawDate = new OutputProperty(commandOutput, "date").property();
+        return new HgDateTime(rawDate).toInstant();
     }
 
     @Override
@@ -47,7 +50,7 @@ public class CommandLineChangeset implements Changeset {
 
     @Override
     public String getMessage() {
-        return new OutputProperty(commandOutput, "desc").property();
+        return new OutputProperty(commandOutput, "message").property();
     }
 
     @Override
@@ -84,7 +87,7 @@ public class CommandLineChangeset implements Changeset {
                 "user='" + getUser() + '\'' +
                 ", branch='" + getBranch() + '\'' +
                 ", formattedDateTime='" + getFormattedDateTime() + '\'' +
-                ", dateTime=" + getDateTime() +
+                ", dateTime='" + getDateTime() + '\'' +
                 ", message='" + getMessage() + '\'' +
                 ", node='" + getNode() + '\'' +
                 ", tags=" + tags() +

@@ -45,7 +45,7 @@ public class HgCommandTest {
 
         String actual = command.toString();
 
-        String expected = "CurrentChangeset{repoPath='/foo/foo', command=[hg, log]}";
+        String expected = "CurrentChangeset{repoPath='/foo/foo', command=[hg log]}";
         assertEquals(expected, actual);
     }
 }
