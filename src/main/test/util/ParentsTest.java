@@ -28,6 +28,16 @@ public class ParentsTest {
 
 
     @Test
+    public void rightNegative() {
+        String twoParents = "3:5d5f431c95a7f6e3d839d83a6cd4d7fa8504f718 -1:0000000000000000000000000000000000000000";
+
+        String actual = new Parents(twoParents).right();
+
+        assertTrue(actual.isEmpty());
+    }
+
+
+    @Test
     public void left_onlyOneParent() {
         String onlyOne = "4:370d3f31c2dd";
         String expected = "4:370d3f31c2dd";

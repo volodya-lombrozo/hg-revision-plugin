@@ -11,6 +11,7 @@ import java.io.File;
 import java.util.Properties;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 @Ignore("For manual testing only")
 public class ScanTest {
@@ -43,5 +44,23 @@ public class ScanTest {
         System.out.println("Right parent: " + rightParent);
         assertNotNull(changeset);
     }
+
+
+    @Test
+    public void commandLineScanTest() throws ExecuteException {
+        String pathname = "D:\\workspace\\hg_repo"; //put your path here
+
+        Properties properties = new Properties();
+        RepositoryInfo info = new RepositoryInfo(new CommandLineRepository(pathname));
+        info.fillProperties(properties);
+
+        System.out.println(properties);
+    }
+
+    @Test
+    public void compareTwoImplementations() {
+        fail();//todo
+    }
+
 
 }

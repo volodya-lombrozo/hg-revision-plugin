@@ -37,10 +37,11 @@ public class CommandLineRepository implements Repository {
 
     @Override
     public Changeset findChangeset(String rev) throws ExecuteException {
-        return new CommandLineChangeset(findChangesetCommand.execute(rev));
+        if (rev.isEmpty()) return null; //fixme: it's really ugly solution to return null.
+        return new CommandLineChangeset(findChangesetCommand.execute(rev), this);
     }
 
     public boolean notEmptyCommands() {
-        return currentChangesetCommand != null && bookmarksCommand != null;
+        return currentChangesetCommand != null && bookmarksCommand != null && findChangesetCommand != null;
     }
 }

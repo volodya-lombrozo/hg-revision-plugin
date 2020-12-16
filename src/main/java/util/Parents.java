@@ -18,9 +18,12 @@ public class Parents {
     public String right() {
         if (isEmptyParents()) return EMPTY;
         String[] parsed = raw.trim().split(" ");
-        if (parsed.length > 1)
-            return parsed[1];
-        else return EMPTY;
+        if (parsed.length > 1) {
+            String right = parsed[1];
+            if (right.startsWith("-"))
+                return EMPTY;
+            else return right;
+        } else return EMPTY;
     }
 
     private boolean isEmptyParents() {
