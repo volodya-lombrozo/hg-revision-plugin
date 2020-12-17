@@ -7,7 +7,7 @@ public class FindChangesetCommand implements ParameterizedCommand {
     private final Function<String, Command> commandFactory;
 
     public FindChangesetCommand(String repoPath) {
-        this(rev -> new HgCommand(repoPath, "hg", "log", "-r", rev, "--template", "user:'{author}'\nbranch:'{branch}'\ndate:'{date|isodate}'\nmessage:'{desc}'\nnode:'{node}'\nrev:'{rev}'\ntags:'{tags}'\nparents:'{parents}'"));
+        this(rev -> new HgCommand(repoPath, "hg", "log", "-r", rev, "--debug", "--template", "user:'{author}'\nbranch:'{branch}'\ndate:'{date|isodate}'\nmessage:'{desc}'\nnode:'{node}'\nrev:'{rev}'\ntags:'{tags}'\nparents:'{parents}'"));
     }
 
     public FindChangesetCommand(Function<String, Command> commandFactory) {

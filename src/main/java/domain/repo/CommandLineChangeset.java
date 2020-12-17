@@ -9,6 +9,7 @@ import util.exceptions.ParentSearchException;
 
 import java.time.Instant;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -79,7 +80,9 @@ public class CommandLineChangeset implements Changeset {
 
     @Override
     public List<String> tags() {
-        return Arrays.asList(new OutputProperty(commandOutput, "tags").property().split(" ").clone());
+        String tags = new OutputProperty(commandOutput, "tags").property();
+        if (tags == null || tags.isEmpty()) return Collections.emptyList();
+        return Arrays.asList(tags.split(" ").clone());
     }
 
     @Override

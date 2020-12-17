@@ -3,6 +3,7 @@ package domain.repo;
 import com.aragost.javahg.Bookmark;
 import com.aragost.javahg.commands.BookmarksCommand;
 import domain.command.ExecuteException;
+import service.RepositorySteward;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,6 +11,10 @@ import java.util.stream.Collectors;
 public class JavaHgRepository implements Repository {
 
     private final com.aragost.javahg.Repository delegate;
+
+    public JavaHgRepository(String repoPath) {
+        this(new RepositorySteward(repoPath).openRepository());
+    }
 
     public JavaHgRepository(com.aragost.javahg.Repository delegate) {
         this.delegate = delegate;
@@ -22,7 +27,9 @@ public class JavaHgRepository implements Repository {
 
     @Override
     public Changeset currentChangeset() {
-        return new JavaHgChangeset(delegate.workingCopy().getParent1());
+        com.aragost.javahg.Changeset changeset = delegate.workingCopy().getParent1();
+        if (changeset == null) return null;
+        return new JavaHgChangeset(changeset);
     }
 
     @Override

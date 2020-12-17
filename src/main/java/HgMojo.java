@@ -24,15 +24,12 @@ public class HgMojo extends AbstractMojo {
 
     public void execute() throws MojoExecutionException {
         try {
-            RepositorySteward scanner = new RepositorySteward(baseDir);
             getLog().info("Hg project dir: " + baseDir);
-            getLog().info("Start scanning of hg project");
-            Repository repository = scanner.openRepository();
-            getLog().info("Repository was opened");
-            RepositoryInfo info = new RepositoryInfo(new JavaHgRepository(repository));
-            getLog().info("Starting setting properties...");
+            getLog().info("Start of scanning hg project");
+            RepositoryInfo info = new RepositoryInfo(new JavaHgRepository(baseDir));
+            getLog().info("Start of setting properties...");
             info.fillProperties(project.getProperties());
-            getLog().info("Scanning is done!");
+            getLog().info("Scanning is done successfully.");
         } catch (Exception e) {
             StringWriter sw = new StringWriter();
             PrintWriter pw = new PrintWriter(sw);

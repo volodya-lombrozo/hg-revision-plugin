@@ -1,65 +1,73 @@
-import com.aragost.javahg.Repository;
 import domain.RepositoryInfo;
 import domain.command.ExecuteException;
 import domain.repo.Changeset;
 import domain.repo.CommandLineRepository;
 import domain.repo.JavaHgRepository;
+import domain.repo.Repository;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import java.io.File;
 import java.util.Properties;
+import java.util.logging.Logger;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
-@Ignore("For manual testing only")
+@Ignore("for manual testing only")
 public class ScanTest {
 
-    @Test
-    @Ignore("for manual testing only")
-    public void currentChangeSetTest() throws ExecuteException {
-        String pathname = "D:\\workspace\\hg_repo"; //put your path here
-        Repository repository = Repository.open(new File(pathname));
+        private static final String path = "D:\\workspace\\hg_repo";
+    private static final Logger logger = Logger.getLogger(ScanTest.class.getName());
 
+    @Test
+    public void javaHgFillProperties() throws ExecuteException {
         Properties properties = new Properties();
-        RepositoryInfo info = new RepositoryInfo(new JavaHgRepository(repository));
+        RepositoryInfo info = new RepositoryInfo(new JavaHgRepository(path));
+
         info.fillProperties(properties);
 
-        System.out.println(properties);
-        assertNotNull(repository);
-        assertNotNull(repository.workingCopy().getParent1());
+        logger.info(properties.toString());
+        assertFalse(properties.isEmpty());
     }
 
     @Test
-    public void integrationTest() throws ExecuteException {
-        CommandLineRepository repository = new CommandLineRepository("D:\\workspace\\hg_repo"); //pass your path there
-
+    public void commandLineRepoLoadParentsTest() throws ExecuteException {
+        CommandLineRepository repository = new CommandLineRepository(path);
         Changeset changeset = repository.currentChangeset();
-        Changeset leftParent = changeset.getLeftParent();
-        Changeset rightParent = changeset.getRightParent();
 
-        System.out.println("Child: " + changeset);
-        System.out.println("Left parent: " + leftParent);
-        System.out.println("Right parent: " + rightParent);
+        Changeset rightParent = changeset.getRightParent();
+        Changeset leftParent = changeset.getLeftParent();
+
+        logger.info("Child: " + changeset);
+        logger.info("Right parent: " + rightParent);
+        logger.info("Left parent: " + leftParent);
         assertNotNull(changeset);
+        assertNotNull(leftParent);
+        assertNotNull(rightParent);
     }
 
 
     @Test
-    public void commandLineScanTest() throws ExecuteException {
-        String pathname = "D:\\workspace\\hg_repo"; //put your path here
-
+    public void commandLineFillPropertiesTest() throws ExecuteException {
         Properties properties = new Properties();
-        RepositoryInfo info = new RepositoryInfo(new CommandLineRepository(pathname));
+        RepositoryInfo info = new RepositoryInfo(new CommandLineRepository(path));
+
         info.fillProperties(properties);
 
-        System.out.println(properties);
+        logger.info(properties.toString());
+        assertFalse(properties.isEmpty());
     }
 
     @Test
-    public void compareTwoImplementations() {
-        fail();//todo
+    public void compareTwoImplementations() throws ExecuteException {
+        Repository javaHg = new JavaHgRepository(path);
+        Repository commandLine = new CommandLineRepository(path);
+        Properties javaHgProps = new Properties();
+        Properties commandLineProps = new Properties();
+
+        new RepositoryInfo(javaHg).fillProperties(javaHgProps);
+        new RepositoryInfo(commandLine).fillProperties(commandLineProps);
+
+        assertEquals(javaHgProps, commandLineProps);
     }
 
 

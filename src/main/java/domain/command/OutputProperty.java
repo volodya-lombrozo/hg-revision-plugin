@@ -26,6 +26,7 @@ public class OutputProperty {
     private String value(String raw) {
         int start = raw.indexOf("'");
         int end = raw.lastIndexOf("'");
+        if (start >= end) return "";
         return raw.substring(start + 1, end);
     }
 

@@ -43,12 +43,16 @@ public class JavaHgChangeset implements Changeset {
 
     @Override
     public Changeset getLeftParent() {
-        return new JavaHgChangeset(delegate.getParent1());
+        com.aragost.javahg.Changeset parent1 = delegate.getParent1();
+        if (parent1 == null) return null;
+        return new JavaHgChangeset(parent1);
     }
 
     @Override
     public Changeset getRightParent() {
-        return new JavaHgChangeset(delegate.getParent2());
+        com.aragost.javahg.Changeset parent2 = delegate.getParent2();
+        if(parent2 == null) return null;
+        return new JavaHgChangeset(parent2);
     }
 
     @Override

@@ -1,6 +1,5 @@
 package domain;
 
-import com.aragost.javahg.DateTime;
 import domain.repo.Changeset;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,7 +7,6 @@ import org.mockito.Mockito;
 
 import java.time.Instant;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
