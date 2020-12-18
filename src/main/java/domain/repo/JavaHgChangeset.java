@@ -1,9 +1,11 @@
 package domain.repo;
 
 import com.aragost.javahg.DateTime;
+import util.OldZonedDateTime;
 import util.FormattedDateTime;
+import util.MinZonedDateTime;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -33,12 +35,12 @@ public class JavaHgChangeset implements Changeset {
     }
 
     @Override
-    public Instant getDateTime() {
+    public ZonedDateTime getZonedDateTime() {
         DateTime timestamp = delegate.getTimestamp();
-        if (timestamp == null) return Instant.MIN;
+        if (timestamp == null) return new MinZonedDateTime().min();
         Date date = timestamp.getDate();
-        if (date == null) return Instant.MIN;
-        return date.toInstant();
+        if (date == null) return new MinZonedDateTime().min();
+        return new OldZonedDateTime(date).toZonedDateTime();
     }
 
     @Override
@@ -51,7 +53,7 @@ public class JavaHgChangeset implements Changeset {
     @Override
     public Changeset getRightParent() {
         com.aragost.javahg.Changeset parent2 = delegate.getParent2();
-        if(parent2 == null) return null;
+        if (parent2 == null) return null;
         return new JavaHgChangeset(parent2);
     }
 

@@ -55,6 +55,7 @@ public class ScanTest {
         assertFalse(properties.isEmpty());
     }
 
+
     @Test
     public void compareTwoImplementations() throws ExecuteException {
         Repository javaHg = new JavaHgRepository(path);

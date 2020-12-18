@@ -16,7 +16,7 @@ public class CommandLineChangesetTest {
     public void toStringTest() {
         String author = "author";
         String branch = "branch";
-        String date = "2020-10-19 11:53 +0300";
+        String date = "1567677484 -10800";
         String message = "message";
         String node = "node";
         String tags = "a b";
@@ -35,8 +35,8 @@ public class CommandLineChangesetTest {
 
         String actual = changeset.toString();
 
-        String expectedDate = new HgDateTime(date).toInstant().toString();
-        String expectedFormattedDate = new FormattedDateTime(new HgDateTime(date).toInstant()).toString();
+        String expectedDate = new HgDateTime(date).toZonedDateTime().toString();
+        String expectedFormattedDate = new FormattedDateTime(new HgDateTime(date).toZonedDateTime()).toString();
         String expectedTags = tags.replace(" ", ", ");
         String expected = "CommandLineChangeset{user='" + author + "', branch='" + branch + "', " +
                 "formattedDateTime='" + expectedFormattedDate + "', dateTime='" + expectedDate + "', message='" + message + "'," +

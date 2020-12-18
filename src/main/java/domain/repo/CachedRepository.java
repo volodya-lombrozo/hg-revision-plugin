@@ -79,7 +79,7 @@ public class CachedRepository implements Repository {
     }
 
     private Map<String, Changeset> findAllChangesets() throws ExecuteException {
-        return new ChangesetTuple(findAllChangesetCommand.execute()).toMap();
+        return new ChangesetTuple(findAllChangesetCommand.execute()).toMap(this);
     }
 
 

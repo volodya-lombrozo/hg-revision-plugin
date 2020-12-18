@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.time.Instant;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
@@ -26,12 +27,12 @@ public class FormattedDateTimeTest {
 
     @Test
     public void instant() {
-        Instant instant = Instant.now();
-        FormattedDateTime dateTime = new FormattedDateTime(instant, formatter);
+        ZonedDateTime time = ZonedDateTime.now();
+        FormattedDateTime dateTime = new FormattedDateTime(time, formatter);
 
         String actual = dateTime.toString();
 
-        String expected = formatter.format(instant.atZone(ZoneId.systemDefault()));
+        String expected = formatter.format(time);
         assertEquals(expected, actual);
     }
 
@@ -47,7 +48,7 @@ public class FormattedDateTimeTest {
 
     @Test
     public void passNullInstant() {
-        Instant empty = null;
+        ZonedDateTime empty = null;
         FormattedDateTime dateTime = new FormattedDateTime(empty, formatter);
 
         String actual = dateTime.toString();

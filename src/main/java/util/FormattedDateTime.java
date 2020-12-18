@@ -1,30 +1,30 @@
 package util;
 
-import java.time.Instant;
-import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class FormattedDateTime {
-    private final Instant instant;
+    private final ZonedDateTime time;
     private final DateTimeFormatter formatter;
 
     public FormattedDateTime(Date date) {
-        this(new DateInstant(date).toInstant());
+        this(new OldZonedDateTime(date).toZonedDateTime());
     }
 
-    public FormattedDateTime(Instant instant) {
-        this(instant, DateTimeFormatter.ISO_DATE_TIME);
+    public FormattedDateTime(ZonedDateTime time) {
+        this(time, DateTimeFormatter.ISO_DATE_TIME);
     }
 
-    public FormattedDateTime(Instant instant, DateTimeFormatter formatter) {
-        this.instant = instant;
+    public FormattedDateTime(ZonedDateTime time, DateTimeFormatter formatter) {
+        this.time = time;
         this.formatter = formatter;
     }
 
     @Override
     public String toString() {
-        if (instant == null || instant.equals(Instant.MIN)) return "";
-        else return formatter.format(instant.atZone(ZoneId.systemDefault()));
+        if (time == null || time.equals(new MinZonedDateTime().min()))
+            return "";
+        else return formatter.format(time);
     }
 }

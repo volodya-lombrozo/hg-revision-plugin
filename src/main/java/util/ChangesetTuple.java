@@ -2,6 +2,7 @@ package util;
 
 import domain.repo.Changeset;
 import domain.repo.CommandLineChangeset;
+import domain.repo.Repository;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -16,10 +17,10 @@ public class ChangesetTuple {
         this.rawListOfChangesets = rawListOfChangesets;
     }
 
-    public Map<String, Changeset> toMap() {
+    public Map<String, Changeset> toMap(Repository repo) {
         Pattern p = Pattern.compile("\\n[\\n]+");
         return Arrays.stream(rawListOfChangesets.split(p.pattern()))
-                .map(CommandLineChangeset::new).collect(Collectors.toMap(CommandLineChangeset::getNode, c -> c));
+                .map(output -> new CommandLineChangeset(output, repo)).collect(Collectors.toMap(CommandLineChangeset::getNode, c -> c));
     }
 
 }

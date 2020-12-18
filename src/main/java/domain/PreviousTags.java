@@ -4,7 +4,7 @@ import domain.repo.Changeset;
 import util.ChangesetTags;
 import util.ChangesetTime;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -72,14 +72,14 @@ public class PreviousTags implements RecordableProperty {
     private static class TimedTags {
 
         private final int step;
-        private final Instant time;
+        private final ZonedDateTime time;
         private final List<String> tags;
 
         TimedTags(int step, Changeset changeset) {
-            this(step, new ChangesetTime(changeset).toInstant(), new ChangesetTags(changeset).toTags());
+            this(step, new ChangesetTime(changeset).toZonedDateTime(), new ChangesetTags(changeset).toTags());
         }
 
-        TimedTags(int step, Instant time, List<String> tags) {
+        TimedTags(int step, ZonedDateTime time, List<String> tags) {
             this.step = step;
             this.time = time;
             this.tags = tags;

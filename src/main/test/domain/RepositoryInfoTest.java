@@ -9,6 +9,7 @@ import org.mockito.Mockito;
 import util.FormattedDateTime;
 
 import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
@@ -26,8 +27,8 @@ public class RepositoryInfoTest {
         Changeset changeset = Mockito.mock(Changeset.class);
         when(repository.currentChangeset()).thenReturn(changeset);
         when(changeset.getBranch()).thenReturn("branch");
-        when(changeset.getDateTime()).thenReturn(Instant.now());
-        when(changeset.getFormattedDateTime()).thenReturn(new FormattedDateTime(Instant.now()).toString());
+        when(changeset.getZonedDateTime()).thenReturn(ZonedDateTime.now());
+        when(changeset.getFormattedDateTime()).thenReturn(new FormattedDateTime(ZonedDateTime.now()).toString());
         when(changeset.getLeftParent()).thenReturn(null);
         when(changeset.getRightParent()).thenReturn(null);
         when(changeset.getMessage()).thenReturn("message");

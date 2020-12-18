@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
@@ -27,11 +28,11 @@ public class PreviousTagsTest {
         Changeset secondChild = Mockito.mock(Changeset.class);
         when(changeset.getLeftParent()).thenReturn(firstChild);
         when(firstChild.getRightParent()).thenReturn(secondChild);
-        Instant dateTime = Instant.now();
-        when(changeset.getDateTime()).thenReturn(dateTime);
-        when(firstChild.getDateTime()).thenReturn(dateTime);
+        ZonedDateTime dateTime = ZonedDateTime.now();
+        when(changeset.getZonedDateTime()).thenReturn(dateTime);
+        when(firstChild.getZonedDateTime()).thenReturn(dateTime);
         when(secondChild.tags()).thenReturn(expectedTags);
-        when(secondChild.getDateTime()).thenReturn(dateTime);
+        when(secondChild.getZonedDateTime()).thenReturn(dateTime);
     }
 
     @Test

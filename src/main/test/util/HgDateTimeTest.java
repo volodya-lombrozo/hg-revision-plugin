@@ -2,23 +2,35 @@ package util;
 
 import org.junit.Test;
 
-import java.time.Instant;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
+import java.time.*;
 
 import static org.junit.Assert.*;
 
 public class HgDateTimeTest {
 
     @Test
-    public void toInstant() {
-        String raw = "2020-10-19 11:53 +0300";
+    public void toZonedDateTime() {
+        String seconds = "1567677484";
+        String offsetSeconds = "-10800";
+        String raw = seconds + " " + offsetSeconds;
+        Instant sec = Instant.ofEpochSecond(Integer.parseInt(seconds));
+        ZoneOffset zoneOffset = ZoneOffset.ofTotalSeconds(-1 * Integer.parseInt(offsetSeconds));
+        ZonedDateTime expected = ZonedDateTime.ofInstant(sec, zoneOffset);
         HgDateTime date = new HgDateTime(raw);
-        Instant expected = ZonedDateTime.parse(raw, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm ZZZ")).toInstant();
 
-        Instant actual = date.toInstant();
+        ZonedDateTime actual = date.toZonedDateTime();
 
         assertEquals(expected, actual);
     }
 
+
+    @Test
+    public void empty() {
+        HgDateTime date = new HgDateTime("");
+        ZonedDateTime expected = new MinZonedDateTime().min();
+
+        ZonedDateTime actual = date.toZonedDateTime();
+
+        assertEquals(expected, actual);
+    }
 }

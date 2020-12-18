@@ -3,11 +3,13 @@ package domain.repo;
 import domain.command.ExecuteException;
 import domain.command.OutputProperty;
 import util.FormattedDateTime;
+import util.HgChangesetString;
 import util.HgDateTime;
 import util.Parents;
 import util.exceptions.ParentSearchException;
 
 import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -20,6 +22,10 @@ public class CommandLineChangeset implements Changeset {
 
     public CommandLineChangeset(String commandOutput) {
         this(commandOutput, new FakeRepository());
+    }
+
+    public CommandLineChangeset(Changeset changeset, Repository repository) {
+        this(new HgChangesetString(changeset).toString(), repository);
     }
 
     public CommandLineChangeset(String commandOutput, Repository repository) {
@@ -39,13 +45,13 @@ public class CommandLineChangeset implements Changeset {
 
     @Override
     public String getFormattedDateTime() {
-        return new FormattedDateTime(getDateTime()).toString();
+        return new FormattedDateTime(getZonedDateTime()).toString();
     }
 
     @Override
-    public Instant getDateTime() {
+    public ZonedDateTime getZonedDateTime() {
         String rawDate = new OutputProperty(commandOutput, "date").property();
-        return new HgDateTime(rawDate).toInstant();
+        return new HgDateTime(rawDate).toZonedDateTime();
     }
 
     @Override
@@ -114,7 +120,7 @@ public class CommandLineChangeset implements Changeset {
                 "user='" + getUser() + '\'' +
                 ", branch='" + getBranch() + '\'' +
                 ", formattedDateTime='" + getFormattedDateTime() + '\'' +
-                ", dateTime='" + getDateTime() + '\'' +
+                ", dateTime='" + getZonedDateTime() + '\'' +
                 ", message='" + getMessage() + '\'' +
                 ", node='" + getNode() + '\'' +
                 ", tags=" + tags() +

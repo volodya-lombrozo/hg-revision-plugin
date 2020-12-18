@@ -1,6 +1,7 @@
 package domain.repo;
 
 import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 public interface Changeset {
@@ -11,7 +12,7 @@ public interface Changeset {
 
     String getFormattedDateTime();
 
-    Instant getDateTime();
+    ZonedDateTime getZonedDateTime();
 
     Changeset getLeftParent();
 

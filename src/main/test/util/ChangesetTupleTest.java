@@ -2,7 +2,9 @@ package util;
 
 import domain.repo.Changeset;
 import domain.repo.CommandLineChangeset;
+import domain.repo.Repository;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import java.util.Map;
 
@@ -19,7 +21,7 @@ public class ChangesetTupleTest {
         CommandLineChangeset firstExpected = new CommandLineChangeset(firstChangeset);
         CommandLineChangeset secondExpected = new CommandLineChangeset(secondChangeset);
 
-        Map<String, Changeset> actual = new ChangesetTuple(input).toMap();
+        Map<String, Changeset> actual = new ChangesetTuple(input).toMap(Mockito.mock(Repository.class));
 
         Changeset first = actual.get("1:revision");
         Changeset second = actual.get("2:revision");

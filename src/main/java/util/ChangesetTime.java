@@ -4,6 +4,7 @@ package util;
 import domain.repo.Changeset;
 
 import java.time.Instant;
+import java.time.ZonedDateTime;
 
 public class ChangesetTime {
 
@@ -13,10 +14,10 @@ public class ChangesetTime {
         this.changeset = changeset;
     }
 
-    public Instant toInstant() {
-        if (changeset == null || changeset.getDateTime() == null)
-            return Instant.MIN;
-        else return changeset.getDateTime();
+    public ZonedDateTime toZonedDateTime() {
+        if (changeset == null || changeset.getZonedDateTime() == null)
+            return new MinZonedDateTime().min();
+        else return changeset.getZonedDateTime();
     }
 
 }
