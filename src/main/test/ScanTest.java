@@ -1,9 +1,6 @@
 import domain.RepositoryInfo;
 import domain.command.ExecuteException;
-import domain.repo.Changeset;
-import domain.repo.CommandLineRepository;
-import domain.repo.JavaHgRepository;
-import domain.repo.Repository;
+import domain.repo.*;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -15,7 +12,7 @@ import static org.junit.Assert.*;
 @Ignore("for manual testing only")
 public class ScanTest {
 
-        private static final String path = "D:\\workspace\\hg_repo";
+    private static final String path = "D:\\workspace\\hg_repo";
     private static final Logger logger = Logger.getLogger(ScanTest.class.getName());
 
     @Test
@@ -49,7 +46,8 @@ public class ScanTest {
     @Test
     public void commandLineFillPropertiesTest() throws ExecuteException {
         Properties properties = new Properties();
-        RepositoryInfo info = new RepositoryInfo(new CommandLineRepository(path));
+        RepositoryInfo info = new RepositoryInfo(new CachedRepository(new CommandLineRepository(path)));
+//        RepositoryInfo info = new RepositoryInfo(new CommandLineRepository(path));
 
         info.fillProperties(properties);
 

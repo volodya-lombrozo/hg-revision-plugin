@@ -11,4 +11,6 @@ public interface Repository {
     Changeset currentChangeset() throws ExecuteException;
 
     Changeset findChangeset(String rev) throws ExecuteException;
+
+    String path();
 }

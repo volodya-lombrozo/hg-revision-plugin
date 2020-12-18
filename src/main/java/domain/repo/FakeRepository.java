@@ -19,6 +19,11 @@ public class FakeRepository implements Repository {
     }
 
     @Override
+    public String path() {
+        return "";
+    }
+
+    @Override
     public String toString() {
         return "FakeRepository#" + hashCode();
     }

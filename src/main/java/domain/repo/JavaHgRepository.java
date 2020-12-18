@@ -38,6 +38,11 @@ public class JavaHgRepository implements Repository {
     }
 
     @Override
+    public String path() {
+        return delegate.getDirectory().getPath();
+    }
+
+    @Override
     public String toString() {
         return "JavaHgRepository{" + "delegate=" + delegate + '}';
     }
