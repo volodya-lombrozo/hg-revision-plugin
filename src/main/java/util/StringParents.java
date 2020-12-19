@@ -1,11 +1,11 @@
 package util;
 
-public class Parents {
+public class StringParents {
 
     private final String raw;
     private final String EMPTY = "";
 
-    public Parents(String raw) {
+    public StringParents(String raw) {
         this.raw = raw;
     }
 

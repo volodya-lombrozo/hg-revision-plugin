@@ -4,7 +4,7 @@ import domain.repo.Changeset;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import util.time.FormattedDateTime;
+import util.time.FormattedTime;
 
 import java.util.Date;
 import java.util.Properties;
@@ -17,7 +17,7 @@ public class CommitDateTest {
 
     private Changeset changeset;
     private final Date date = new Date();
-    private final String expectedDate = new FormattedDateTime(date).toString();
+    private final String expectedDate = new FormattedTime(date).toString();
 
 
     @Before

@@ -14,7 +14,7 @@ public class InputStringTest {
     public void read() throws IOException {
         String expected = "expected";
         InputStream stream = new ByteArrayInputStream(expected.getBytes());
-        InputString inputString = new InputString(stream);
+        StringInputStream inputString = new StringInputStream(stream);
 
         String actual = inputString.read();
 

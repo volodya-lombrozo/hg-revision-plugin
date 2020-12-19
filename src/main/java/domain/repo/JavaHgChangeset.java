@@ -1,7 +1,7 @@
 package domain.repo;
 
 import com.aragost.javahg.DateTime;
-import util.time.FormattedDateTime;
+import util.time.FormattedTime;
 import util.time.MinZonedDateTime;
 import util.time.OldZonedDateTime;
 
@@ -31,7 +31,7 @@ public class JavaHgChangeset implements Changeset {
     public String getFormattedDateTime() {
         DateTime timestamp = delegate.getTimestamp();
         if (timestamp == null) return "";
-        else return new FormattedDateTime(timestamp.getDate()).toString();
+        else return new FormattedTime(timestamp.getDate()).toString();
     }
 
     @Override

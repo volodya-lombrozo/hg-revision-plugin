@@ -9,7 +9,7 @@ import org.mockito.Mockito;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
-public class HgChangesetStringTest {
+public class FormattedChangesetTest {
 
     @Test
     public void conversionTest() throws ExecuteException {
@@ -34,7 +34,7 @@ public class HgChangesetStringTest {
         when(repo.findChangeset("10:2d7430ab8364")).thenReturn(new CommandLineChangeset("rev:'10'\nnode:'2d7430ab8364'"));
         CommandLineChangeset changeset = new CommandLineChangeset(expected, repo);
 
-        String actual = new HgChangesetString(changeset).toString();
+        String actual = new FormattedChangeset(changeset).toString();
 
         assertEquals(expected, actual);
     }

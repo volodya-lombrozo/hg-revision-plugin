@@ -1,16 +1,15 @@
 package util;
 
 import org.junit.Test;
-import util.OutputProperty;
 
 import static org.junit.Assert.assertEquals;
 
-public class OutputPropertyTest {
+public class HgPropertyTest {
 
     @Test
     public void property_simpleValue() {
         String expected = "some value;";
-        OutputProperty property = new OutputProperty("key:'" + expected + "'", "key");
+        HgProperty property = new HgProperty("key:'" + expected + "'", "key");
 
         String actual = property.property();
 
@@ -20,7 +19,7 @@ public class OutputPropertyTest {
     @Test
     public void property_arrayValue() {
         String expected = "'[a; b; c]'";
-        OutputProperty property = new OutputProperty("key:'" + expected + "'", "key");
+        HgProperty property = new HgProperty("key:'" + expected + "'", "key");
 
         String actual = property.property();
 

@@ -9,11 +9,11 @@ import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class ChangesetTuple {
+public class StringChangesetCollection {
 
     private final String rawListOfChangesets;
 
-    public ChangesetTuple(String rawListOfChangesets) {
+    public StringChangesetCollection(String rawListOfChangesets) {
         this.rawListOfChangesets = rawListOfChangesets;
     }
 

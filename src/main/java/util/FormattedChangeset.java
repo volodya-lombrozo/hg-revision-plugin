@@ -3,11 +3,11 @@ package util;
 import domain.repo.Changeset;
 import util.time.HgDateTimeString;
 
-public class HgChangesetString {
+public class FormattedChangeset {
 
     private final Changeset changeset;
 
-    public HgChangesetString(Changeset changeset) {
+    public FormattedChangeset(Changeset changeset) {
         this.changeset = changeset;
     }
 

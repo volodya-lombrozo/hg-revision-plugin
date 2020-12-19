@@ -2,17 +2,17 @@ package util;
 
 import java.util.Arrays;
 
-public class OutputProperty {
+public class HgProperty {
 
     private final String commandOutput;
     private final String key;
     private final String delimiter;
 
-    public OutputProperty(String commandOutput, String key) {
+    public HgProperty(String commandOutput, String key) {
         this(commandOutput, key, "\n");
     }
 
-    public OutputProperty(String commandOutput, String key, String delimiter) {
+    public HgProperty(String commandOutput, String key, String delimiter) {
         this.commandOutput = commandOutput;
         this.key = key;
         this.delimiter = delimiter;

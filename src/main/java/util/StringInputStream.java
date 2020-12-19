@@ -6,15 +6,15 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.stream.Collectors;
 
-public class InputString {
+public class StringInputStream {
     private final InputStream is;
     private final String delimiter;
 
-    public InputString(InputStream is) {
+    public StringInputStream(InputStream is) {
         this(is, "\n");
     }
 
-    public InputString(InputStream is, String delimiter) {
+    public StringInputStream(InputStream is, String delimiter) {
         this.is = is;
         this.delimiter = delimiter;
     }

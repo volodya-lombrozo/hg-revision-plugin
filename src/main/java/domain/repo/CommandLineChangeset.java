@@ -1,11 +1,11 @@
 package domain.repo;
 
 import util.exceptions.ExecuteException;
-import util.OutputProperty;
-import util.time.FormattedDateTime;
-import util.HgChangesetString;
+import util.HgProperty;
+import util.time.FormattedTime;
+import util.FormattedChangeset;
 import util.time.HgDateTime;
-import util.Parents;
+import util.StringParents;
 import util.exceptions.ParentSearchException;
 
 import java.time.ZonedDateTime;
@@ -24,7 +24,7 @@ public class CommandLineChangeset implements Changeset {
     }
 
     public CommandLineChangeset(Changeset changeset, Repository repository) {
-        this(new HgChangesetString(changeset).toString(), repository);
+        this(new FormattedChangeset(changeset).toString(), repository);
     }
 
     public CommandLineChangeset(String commandOutput, Repository repository) {
@@ -34,28 +34,28 @@ public class CommandLineChangeset implements Changeset {
 
     @Override
     public String getUser() {
-        return new OutputProperty(commandOutput, "user").property();
+        return new HgProperty(commandOutput, "user").property();
     }
 
     @Override
     public String getBranch() {
-        return new OutputProperty(commandOutput, "branch").property();
+        return new HgProperty(commandOutput, "branch").property();
     }
 
     @Override
     public String getFormattedDateTime() {
-        return new FormattedDateTime(getZonedDateTime()).toString();
+        return new FormattedTime(getZonedDateTime()).toString();
     }
 
     @Override
     public ZonedDateTime getZonedDateTime() {
-        String rawDate = new OutputProperty(commandOutput, "date").property();
+        String rawDate = new HgProperty(commandOutput, "date").property();
         return new HgDateTime(rawDate).toZonedDateTime();
     }
 
     @Override
     public Changeset getLeftParent() {
-        String rev = new Parents(parents()).left();
+        String rev = new StringParents(parents()).left();
         try {
             return repository.findChangeset(rev);
         } catch (ExecuteException ex) {
@@ -65,7 +65,7 @@ public class CommandLineChangeset implements Changeset {
 
     @Override
     public Changeset getRightParent() {
-        String rev = new Parents(parents()).right();
+        String rev = new StringParents(parents()).right();
         try {
             return repository.findChangeset(rev);
         } catch (ExecuteException ex) {
@@ -75,28 +75,28 @@ public class CommandLineChangeset implements Changeset {
 
     @Override
     public String getMessage() {
-        return new OutputProperty(commandOutput, "message").property();
+        return new HgProperty(commandOutput, "message").property();
     }
 
     @Override
     public String getNode() {
-        return new OutputProperty(commandOutput, "node").property();
+        return new HgProperty(commandOutput, "node").property();
     }
 
     @Override
     public List<String> tags() {
-        String tags = new OutputProperty(commandOutput, "tags").property();
+        String tags = new HgProperty(commandOutput, "tags").property();
         if (tags == null || tags.isEmpty()) return Collections.emptyList();
         return Arrays.asList(tags.split(" ").clone());
     }
 
     @Override
     public String getRevision() {
-        return new OutputProperty(commandOutput, "rev").property();
+        return new HgProperty(commandOutput, "rev").property();
     }
 
     private String parents() {
-        return new OutputProperty(commandOutput, "parents").property().trim();
+        return new HgProperty(commandOutput, "parents").property().trim();
     }
 
 

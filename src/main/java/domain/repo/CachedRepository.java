@@ -3,7 +3,7 @@ package domain.repo;
 import domain.command.AllChangesetsCommand;
 import domain.command.Command;
 import util.exceptions.ExecuteException;
-import util.ChangesetTuple;
+import util.StringChangesetCollection;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -79,7 +79,7 @@ public class CachedRepository implements Repository {
     }
 
     private Map<String, Changeset> findAllChangesets() throws ExecuteException {
-        return new ChangesetTuple(findAllChangesetCommand.execute()).toMap(this);
+        return new StringChangesetCollection(findAllChangesetCommand.execute()).toMap(this);
     }
 
 

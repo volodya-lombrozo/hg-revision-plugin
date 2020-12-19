@@ -10,7 +10,7 @@ import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 
-public class ChangesetTupleTest {
+public class StringChangesetCollectionTest {
 
 
     @Test
@@ -21,7 +21,7 @@ public class ChangesetTupleTest {
         CommandLineChangeset firstExpected = new CommandLineChangeset(firstChangeset);
         CommandLineChangeset secondExpected = new CommandLineChangeset(secondChangeset);
 
-        Map<String, Changeset> actual = new ChangesetTuple(input).toMap(Mockito.mock(Repository.class));
+        Map<String, Changeset> actual = new StringChangesetCollection(input).toMap(Mockito.mock(Repository.class));
 
         Changeset first = actual.get("1:firstNode");
         Changeset second = actual.get("2:secondNode");

@@ -1,6 +1,6 @@
 package domain.command;
 
-import util.InputString;
+import util.StringInputStream;
 import util.exceptions.ExecuteException;
 
 import java.io.File;
@@ -28,9 +28,9 @@ public class HgCommand implements Command {
             File file = Paths.get(repoPath).toFile();
             processBuilder.directory(file);
             Process process = processBuilder.start();
-            String output = new InputString(process.getInputStream()).read();
+            String output = new StringInputStream(process.getInputStream()).read();
             int exitCode = process.waitFor();
-            if (exitCode != 0) throw new ExecuteException(new InputString(process.getErrorStream()).read());
+            if (exitCode != 0) throw new ExecuteException(new StringInputStream(process.getErrorStream()).read());
             return output;
         } catch (IOException | InterruptedException e) {
             throw new ExecuteException("Fail during execution of command: " + this, e);

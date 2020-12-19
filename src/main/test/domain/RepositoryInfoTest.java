@@ -6,7 +6,7 @@ import domain.repo.Repository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import util.time.FormattedDateTime;
+import util.time.FormattedTime;
 
 import java.time.ZonedDateTime;
 import java.util.Arrays;
@@ -27,7 +27,7 @@ public class RepositoryInfoTest {
         when(repository.currentChangeset()).thenReturn(changeset);
         when(changeset.getBranch()).thenReturn("branch");
         when(changeset.getZonedDateTime()).thenReturn(ZonedDateTime.now());
-        when(changeset.getFormattedDateTime()).thenReturn(new FormattedDateTime(ZonedDateTime.now()).toString());
+        when(changeset.getFormattedDateTime()).thenReturn(new FormattedTime(ZonedDateTime.now()).toString());
         when(changeset.getLeftParent()).thenReturn(null);
         when(changeset.getRightParent()).thenReturn(null);
         when(changeset.getMessage()).thenReturn("message");

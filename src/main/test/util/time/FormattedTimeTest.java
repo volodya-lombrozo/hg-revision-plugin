@@ -1,7 +1,6 @@
 package util.time;
 
 import org.junit.Test;
-import util.time.FormattedDateTime;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -10,14 +9,14 @@ import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
 
-public class FormattedDateTimeTest {
+public class FormattedTimeTest {
 
     private final DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
 
     @Test
     public void plainDate() {
         Date date = new Date();
-        FormattedDateTime dateTime = new FormattedDateTime(date);
+        FormattedTime dateTime = new FormattedTime(date);
 
         String actual = dateTime.toString();
 
@@ -28,7 +27,7 @@ public class FormattedDateTimeTest {
     @Test
     public void instant() {
         ZonedDateTime time = ZonedDateTime.now();
-        FormattedDateTime dateTime = new FormattedDateTime(time, formatter);
+        FormattedTime dateTime = new FormattedTime(time, formatter);
 
         String actual = dateTime.toString();
 
@@ -39,7 +38,7 @@ public class FormattedDateTimeTest {
     @Test
     public void passNullPlainDate() {
         Date empty = null;
-        FormattedDateTime dateTime = new FormattedDateTime(empty);
+        FormattedTime dateTime = new FormattedTime(empty);
 
         String actual = dateTime.toString();
 
@@ -49,7 +48,7 @@ public class FormattedDateTimeTest {
     @Test
     public void passNullInstant() {
         ZonedDateTime empty = null;
-        FormattedDateTime dateTime = new FormattedDateTime(empty, formatter);
+        FormattedTime dateTime = new FormattedTime(empty, formatter);
 
         String actual = dateTime.toString();
 
