@@ -4,7 +4,7 @@ import util.exceptions.ExecuteException;
 import util.HgProperty;
 import util.time.FormattedTime;
 import util.FormattedChangeset;
-import util.time.HgDateTime;
+import util.time.StringHgTime;
 import util.StringParents;
 import util.exceptions.ParentSearchException;
 
@@ -50,7 +50,7 @@ public class CommandLineChangeset implements Changeset {
     @Override
     public ZonedDateTime getZonedDateTime() {
         String rawDate = new HgProperty(commandOutput, "date").property();
-        return new HgDateTime(rawDate).toZonedDateTime();
+        return new StringHgTime(rawDate).toZonedDateTime();
     }
 
     @Override

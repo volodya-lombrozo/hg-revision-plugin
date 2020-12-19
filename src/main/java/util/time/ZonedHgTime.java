@@ -2,10 +2,10 @@ package util.time;
 
 import java.time.ZonedDateTime;
 
-public class HgDateTimeString {
+public class ZonedHgTime {
     private final ZonedDateTime time;
 
-    public HgDateTimeString(ZonedDateTime time) {
+    public ZonedHgTime(ZonedDateTime time) {
         this.time = time;
     }
 

@@ -1,8 +1,6 @@
 package util.time;
 
 import org.junit.Test;
-import util.time.HgDateTime;
-import util.time.MinZonedDateTime;
 
 import java.time.Instant;
 import java.time.ZoneOffset;
@@ -10,7 +8,7 @@ import java.time.ZonedDateTime;
 
 import static org.junit.Assert.assertEquals;
 
-public class HgDateTimeTest {
+public class StringHgTimeTest {
 
     @Test
     public void toZonedDateTime() {
@@ -20,7 +18,7 @@ public class HgDateTimeTest {
         Instant sec = Instant.ofEpochSecond(Integer.parseInt(seconds));
         ZoneOffset zoneOffset = ZoneOffset.ofTotalSeconds(-1 * Integer.parseInt(offsetSeconds));
         ZonedDateTime expected = ZonedDateTime.ofInstant(sec, zoneOffset);
-        HgDateTime date = new HgDateTime(raw);
+        StringHgTime date = new StringHgTime(raw);
 
         ZonedDateTime actual = date.toZonedDateTime();
 
@@ -30,7 +28,7 @@ public class HgDateTimeTest {
 
     @Test
     public void empty() {
-        HgDateTime date = new HgDateTime("");
+        StringHgTime date = new StringHgTime("");
         ZonedDateTime expected = new MinZonedDateTime().min();
 
         ZonedDateTime actual = date.toZonedDateTime();

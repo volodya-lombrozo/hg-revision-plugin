@@ -4,7 +4,7 @@ import util.exceptions.ExecuteException;
 import org.junit.Test;
 import org.mockito.Mockito;
 import util.time.FormattedTime;
-import util.time.HgDateTime;
+import util.time.StringHgTime;
 import util.exceptions.ParentSearchException;
 
 import static org.junit.Assert.*;
@@ -35,8 +35,8 @@ public class CommandLineChangesetTest {
 
         String actual = changeset.toString();
 
-        String expectedDate = new HgDateTime(date).toZonedDateTime().toString();
-        String expectedFormattedDate = new FormattedTime(new HgDateTime(date).toZonedDateTime()).toString();
+        String expectedDate = new StringHgTime(date).toZonedDateTime().toString();
+        String expectedFormattedDate = new FormattedTime(new StringHgTime(date).toZonedDateTime()).toString();
         String expectedTags = tags.replace(" ", ", ");
         String expected = "CommandLineChangeset{user='" + author + "', branch='" + branch + "', " +
                 "formattedDateTime='" + expectedFormattedDate + "', dateTime='" + expectedDate + "', message='" + message + "'," +

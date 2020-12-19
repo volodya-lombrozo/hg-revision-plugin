@@ -1,7 +1,7 @@
 package util;
 
 import domain.repo.Changeset;
-import util.time.HgDateTimeString;
+import util.time.ZonedHgTime;
 
 public class FormattedChangeset {
 
@@ -15,7 +15,7 @@ public class FormattedChangeset {
     public String toString() {
         return "user:'" + changeset.getUser()
                 + "'\nbranch:'" + changeset.getBranch()
-                + "'\ndate:'" + new HgDateTimeString(changeset.getZonedDateTime()).toString()
+                + "'\ndate:'" + new ZonedHgTime(changeset.getZonedDateTime()).toString()
                 + "'\nmessage:'" + changeset.getMessage()
                 + "'\nnode:'" + changeset.getNode()
                 + "'\ntags:'" + String.join(" ", changeset.tags())

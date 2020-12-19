@@ -4,11 +4,11 @@ import java.time.Instant;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 
-public class HgDateTime {
+public class StringHgTime {
 
     private final String raw;
 
-    public HgDateTime(String raw) {
+    public StringHgTime(String raw) {
         this.raw = raw;
     }
 
