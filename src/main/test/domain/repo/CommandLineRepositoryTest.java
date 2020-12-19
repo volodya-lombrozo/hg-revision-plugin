@@ -65,4 +65,15 @@ public class CommandLineRepositoryTest {
         assertTrue(notEmptyCommands);
     }
 
+
+    @Test
+    public void path() {
+        String expected = "/some/path";
+        CommandLineRepository repo = new CommandLineRepository(expected);
+
+        String path = repo.path();
+
+        assertEquals(expected, path);
+    }
+
 }
