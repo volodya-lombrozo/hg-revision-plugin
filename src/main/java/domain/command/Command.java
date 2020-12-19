@@ -1,5 +1,7 @@
 package domain.command;
 
+import util.exceptions.ExecuteException;
+
 public interface Command {
 
     String execute() throws ExecuteException;

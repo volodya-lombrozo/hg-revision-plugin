@@ -1,8 +1,9 @@
-package domain.command;
+package util;
 
 import org.junit.Test;
+import util.OutputProperty;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class OutputPropertyTest {
 

@@ -1,6 +1,7 @@
 package domain.command;
 
 import org.junit.Test;
+import util.exceptions.ExecuteException;
 
 import static org.junit.Assert.*;
 

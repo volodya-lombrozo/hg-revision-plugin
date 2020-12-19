@@ -1,5 +1,6 @@
-package domain;
+package domain.properties;
 
+import domain.properties.CommitDate;
 import domain.repo.Changeset;
 import org.junit.Before;
 import org.junit.Test;

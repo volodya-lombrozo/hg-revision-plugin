@@ -1,5 +1,5 @@
 import domain.RepositoryInfo;
-import domain.command.ExecuteException;
+import util.exceptions.ExecuteException;
 import domain.repo.*;
 import org.junit.Ignore;
 import org.junit.Test;

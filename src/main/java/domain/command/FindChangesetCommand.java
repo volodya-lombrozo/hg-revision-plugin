@@ -1,5 +1,7 @@
 package domain.command;
 
+import util.exceptions.ExecuteException;
+
 import java.util.function.Function;
 
 public class FindChangesetCommand implements ParameterizedCommand {

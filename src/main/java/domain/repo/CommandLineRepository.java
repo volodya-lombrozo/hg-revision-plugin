@@ -1,6 +1,7 @@
 package domain.repo;
 
 import domain.command.*;
+import util.exceptions.ExecuteException;
 
 import java.util.Arrays;
 import java.util.List;

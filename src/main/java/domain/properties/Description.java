@@ -1,4 +1,4 @@
-package domain;
+package domain.properties;
 
 import domain.repo.Changeset;
 

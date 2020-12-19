@@ -1,7 +1,7 @@
 package domain.repo;
 
-import domain.command.ExecuteException;
-import domain.command.OutputProperty;
+import util.exceptions.ExecuteException;
+import util.OutputProperty;
 import util.FormattedDateTime;
 import util.HgChangesetString;
 import util.HgDateTime;

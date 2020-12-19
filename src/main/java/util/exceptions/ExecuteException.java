@@ -1,4 +1,4 @@
-package domain.command;
+package util.exceptions;
 
 public class ExecuteException extends Exception {
 

@@ -1,5 +1,7 @@
 package domain.command;
 
+import util.exceptions.ExecuteException;
+
 public class AllRepositoryBookmarksCommand implements Command {
 
     private final Command delegate;

@@ -1,4 +1,4 @@
-package domain.command;
+package util;
 
 import org.junit.Test;
 

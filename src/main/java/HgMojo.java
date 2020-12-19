@@ -1,4 +1,3 @@
-import com.aragost.javahg.Repository;
 import domain.RepositoryInfo;
 import domain.repo.JavaHgRepository;
 import org.apache.maven.plugin.AbstractMojo;
@@ -6,7 +5,6 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
-import service.RepositorySteward;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

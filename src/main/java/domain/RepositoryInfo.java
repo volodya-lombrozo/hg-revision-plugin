@@ -1,8 +1,9 @@
 package domain;
 
-import domain.command.ExecuteException;
-import domain.repo.Repository;
+import domain.properties.*;
+import util.exceptions.ExecuteException;
 import domain.repo.Changeset;
+import domain.repo.Repository;
 
 import java.util.Arrays;
 import java.util.List;

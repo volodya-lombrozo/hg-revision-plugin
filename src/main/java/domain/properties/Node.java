@@ -1,25 +1,25 @@
-package domain;
+package domain.properties;
 
 
 import domain.repo.Changeset;
 
 import java.util.Properties;
 
-public class CommitDate implements RecordableProperty {
+public class Node implements RecordableProperty {
 
     private final Changeset changeset;
 
-    public CommitDate(Changeset changeset) {
+    public Node(Changeset changeset) {
         this.changeset = changeset;
     }
 
     @Override
     public void fillProperties(Properties properties) {
-        properties.put("hg.date", this.toString());
+        properties.put("hg.node", this.toString());
     }
 
     @Override
     public String toString() {
-        return changeset.getFormattedDateTime();
+        return changeset.getNode();
     }
 }

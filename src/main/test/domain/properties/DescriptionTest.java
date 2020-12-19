@@ -1,5 +1,7 @@
-package domain;
+package domain.properties;
 
+import domain.properties.Description;
+import domain.properties.RecordableProperty;
 import domain.repo.Changeset;
 import org.junit.Before;
 import org.junit.Test;
@@ -7,10 +9,11 @@ import org.mockito.Mockito;
 
 import java.util.Properties;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
-public class RevisionTest {
+public class DescriptionTest {
 
     private Changeset changeset;
     private String expected;
@@ -18,27 +21,27 @@ public class RevisionTest {
     @Before
     public void setUp() {
         changeset = Mockito.mock(Changeset.class);
-        expected = "1";
-        when(changeset.getRevision()).thenReturn(expected);
+        expected = "Description";
+        when(changeset.getMessage()).thenReturn(expected);
     }
 
     @Test
     public void fillProperties() {
         Properties properties = new Properties();
-        RecordableProperty revision = new Revision(changeset);
+        RecordableProperty description = new Description(changeset);
 
-        revision.fillProperties(properties);
+        description.fillProperties(properties);
 
-        String key = "hg.rev";
+        String key = "hg.desc";
         assertTrue(properties.containsKey(key));
         assertEquals(expected, properties.get(key));
     }
 
     @Test
     public void testToString() {
-        RecordableProperty revision = new Revision(changeset);
+        RecordableProperty description = new Description(changeset);
 
-        String actual = revision.toString();
+        String actual = description.toString();
 
         assertEquals(expected, actual);
     }

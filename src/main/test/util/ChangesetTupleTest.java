@@ -8,7 +8,7 @@ import org.mockito.Mockito;
 
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class ChangesetTupleTest {
 

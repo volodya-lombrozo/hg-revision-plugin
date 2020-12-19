@@ -1,5 +1,6 @@
-package domain;
+package domain.properties;
 
+import domain.properties.Author;
 import domain.repo.Changeset;
 import org.junit.Before;
 import org.junit.Test;
@@ -7,7 +8,8 @@ import org.mockito.Mockito;
 
 import java.util.Properties;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 public class AuthorTest {

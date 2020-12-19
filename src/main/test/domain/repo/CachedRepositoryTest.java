@@ -1,7 +1,7 @@
 package domain.repo;
 
 import domain.command.Command;
-import domain.command.ExecuteException;
+import util.exceptions.ExecuteException;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 public class CachedRepositoryTest {

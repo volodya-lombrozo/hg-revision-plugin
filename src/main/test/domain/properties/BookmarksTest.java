@@ -1,6 +1,8 @@
-package domain;
+package domain.properties;
 
-import domain.command.ExecuteException;
+import domain.properties.Bookmarks;
+import domain.properties.RecordableProperty;
+import util.exceptions.ExecuteException;
 import domain.repo.Repository;
 import org.junit.Before;
 import org.junit.Test;

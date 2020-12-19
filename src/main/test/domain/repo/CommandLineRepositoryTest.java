@@ -1,10 +1,8 @@
 package domain.repo;
 
 import domain.command.Command;
-import domain.command.ExecuteException;
-import domain.command.FindChangesetCommand;
+import util.exceptions.ExecuteException;
 import domain.command.ParameterizedCommand;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 

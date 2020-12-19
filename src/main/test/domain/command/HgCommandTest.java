@@ -2,12 +2,13 @@ package domain.command;
 
 import org.junit.Test;
 import org.mockito.Mockito;
+import util.exceptions.ExecuteException;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
-import static org.junit.Assert.*;
-import static org.mockito.Matchers.anyBoolean;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import static org.mockito.Mockito.when;
 
 public class HgCommandTest {

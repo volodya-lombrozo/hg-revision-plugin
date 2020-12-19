@@ -1,25 +1,25 @@
-package domain;
+package domain.properties;
 
 
 import domain.repo.Changeset;
 
 import java.util.Properties;
 
-public class Node implements RecordableProperty {
+public class Revision implements RecordableProperty {
 
     private final Changeset changeset;
 
-    public Node(Changeset changeset) {
+    public Revision(Changeset changeset) {
         this.changeset = changeset;
     }
 
     @Override
     public void fillProperties(Properties properties) {
-        properties.put("hg.node", this.toString());
+        properties.put("hg.rev", this.toString());
     }
 
     @Override
     public String toString() {
-        return changeset.getNode();
+        return changeset.getRevision();
     }
 }

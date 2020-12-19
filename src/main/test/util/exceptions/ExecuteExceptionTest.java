@@ -1,8 +1,9 @@
-package domain.command;
+package util.exceptions;
 
 import org.junit.Test;
+import util.exceptions.ExecuteException;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class ExecuteExceptionTest {
 

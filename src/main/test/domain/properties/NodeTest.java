@@ -1,5 +1,7 @@
-package domain;
+package domain.properties;
 
+import domain.properties.Node;
+import domain.properties.RecordableProperty;
 import domain.repo.Changeset;
 import org.junit.Before;
 import org.junit.Test;
@@ -7,10 +9,11 @@ import org.mockito.Mockito;
 
 import java.util.Properties;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
-public class BranchTest {
+public class NodeTest {
 
     private Changeset changeset;
     private String expected;
@@ -18,27 +21,27 @@ public class BranchTest {
     @Before
     public void setUp() {
         changeset = Mockito.mock(Changeset.class);
-        expected = "Branch";
-        when(changeset.getBranch()).thenReturn(expected);
+        expected = "nodeHash#123123";
+        when(changeset.getNode()).thenReturn(expected);
     }
 
     @Test
     public void fillProperties() {
         Properties properties = new Properties();
-        Branch branch = new Branch(changeset);
+        RecordableProperty node = new Node(changeset);
 
-        branch.fillProperties(properties);
+        node.fillProperties(properties);
 
-        String key = "hg.branch";
+        String key = "hg.node";
         assertTrue(properties.containsKey(key));
         assertEquals(expected, properties.get(key));
     }
 
     @Test
     public void testToString() {
-        Branch branch = new Branch(changeset);
+        RecordableProperty node = new Node(changeset);
 
-        String actual = branch.toString();
+        String actual = node.toString();
 
         assertEquals(expected, actual);
     }

@@ -1,6 +1,8 @@
-package domain;
+package domain.properties;
 
 
+import domain.properties.Loggable;
+import domain.properties.RecordableProperty;
 import org.junit.Test;
 import org.mockito.Mockito;
 import util.DefaultLogger;
@@ -35,7 +37,7 @@ public class LoggableTest {
 
         loggable.fillProperties(new Properties());
 
-        assertTrue(loggable.loggerIsNotNull());
+        assertTrue(loggable.loggerIsNotEmpty());
         String expectedLoggerName = new DefaultLogger().toLogger().getName();
         assertEquals(expectedLoggerName, loggable.loggerName());
     }

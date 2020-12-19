@@ -1,4 +1,4 @@
-package domain;
+package domain.properties;
 
 
 import util.DefaultLogger;
@@ -25,11 +25,11 @@ public class Loggable implements RecordableProperty {
         delegate.fillProperties(properties);
     }
 
-    boolean loggerIsNotNull() {
+    public boolean loggerIsNotEmpty() {
         return logger != null;
     }
 
-    String loggerName() {
+    public String loggerName() {
         return logger.getName();
     }
 }

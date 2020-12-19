@@ -2,9 +2,11 @@ package util;
 
 import org.junit.Test;
 
-import java.time.*;
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class HgDateTimeTest {
 

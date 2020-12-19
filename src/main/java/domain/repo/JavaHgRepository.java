@@ -2,9 +2,8 @@ package domain.repo;
 
 import com.aragost.javahg.Bookmark;
 import com.aragost.javahg.commands.BookmarksCommand;
-import domain.command.ExecuteException;
-import service.RepositorySteward;
 
+import java.io.File;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,7 +12,7 @@ public class JavaHgRepository implements Repository {
     private final com.aragost.javahg.Repository delegate;
 
     public JavaHgRepository(String repoPath) {
-        this(new RepositorySteward(repoPath).openRepository());
+        this(com.aragost.javahg.Repository.open(new File(repoPath)));
     }
 
     public JavaHgRepository(com.aragost.javahg.Repository delegate) {

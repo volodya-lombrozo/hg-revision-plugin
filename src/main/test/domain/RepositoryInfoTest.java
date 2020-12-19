@@ -1,6 +1,6 @@
 package domain;
 
-import domain.command.ExecuteException;
+import util.exceptions.ExecuteException;
 import domain.repo.Changeset;
 import domain.repo.Repository;
 import org.junit.Before;
@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import util.FormattedDateTime;
 
-import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.List;

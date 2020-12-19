@@ -1,6 +1,6 @@
-package domain;
+package domain.properties;
 
-import domain.command.ExecuteException;
+import util.exceptions.ExecuteException;
 import domain.repo.Repository;
 
 import java.util.List;
