@@ -1,16 +1,19 @@
 package util;
 
+import domain.command.ExecuteException;
 import domain.repo.CommandLineChangeset;
+import domain.repo.Repository;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.when;
 
 public class HgChangesetStringTest {
 
     @Test
-    @Ignore("Not finished yet")
-    public void conversionTest() {
+    public void conversionTest() throws ExecuteException {
         String author = "author";
         String branch = "branch";
         String date = "1567677484 -10800";
@@ -26,8 +29,11 @@ public class HgChangesetStringTest {
                 "node:" + "'" + node + "'\n" +
                 "tags:" + "'" + tags + "'\n" +
                 "revision:" + "'" + revision + "'\n" +
-                "parents:" + "'" + parents;
-        CommandLineChangeset changeset = new CommandLineChangeset(expected);
+                "parents:" + "'" + parents + "'";
+        Repository repo = Mockito.mock(Repository.class);
+        when(repo.findChangeset("4:370d3f31c2dd")).thenReturn(new CommandLineChangeset("rev:'4'\nnode:'370d3f31c2dd'"));
+        when(repo.findChangeset("10:2d7430ab8364")).thenReturn(new CommandLineChangeset("rev:'10'\nnode:'2d7430ab8364'"));
+        CommandLineChangeset changeset = new CommandLineChangeset(expected, repo);
 
         String actual = new HgChangesetString(changeset).toString();
 

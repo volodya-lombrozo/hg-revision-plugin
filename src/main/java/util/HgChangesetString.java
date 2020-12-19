@@ -12,11 +12,13 @@ public class HgChangesetString {
 
     @Override
     public String toString() {
-        return "user:'" + changeset.getUser() + "'\nbranch:'" + changeset.getBranch() + "'\ndate:'"
-                + new HgDateTimeString(changeset.getZonedDateTime()).toString() + "'\nmessage:'" + changeset.getMessage()
+        return "user:'" + changeset.getUser()
+                + "'\nbranch:'" + changeset.getBranch()
+                + "'\ndate:'" + new HgDateTimeString(changeset.getZonedDateTime()).toString()
+                + "'\nmessage:'" + changeset.getMessage()
                 + "'\nnode:'" + changeset.getNode()
                 + "'\ntags:'" + String.join(" ", changeset.tags())
                 + "'\nrevision:'" + changeset.getRevision()
-                + "'\nparents:'{parents}'";
+                + "'\nparents:'" + new ChangesetParents(changeset).toString() + "'";
     }
 }
