@@ -2,7 +2,7 @@ package domain.properties;
 
 import domain.repo.Changeset;
 import util.ChangesetTags;
-import util.ChangesetTime;
+import util.time.ChangesetTime;
 
 import java.time.ZonedDateTime;
 import java.util.HashSet;

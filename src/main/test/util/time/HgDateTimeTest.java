@@ -1,6 +1,8 @@
-package util;
+package util.time;
 
 import org.junit.Test;
+import util.time.HgDateTime;
+import util.time.MinZonedDateTime;
 
 import java.time.Instant;
 import java.time.ZoneOffset;

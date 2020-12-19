@@ -1,4 +1,4 @@
-package util;
+package util.time;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;

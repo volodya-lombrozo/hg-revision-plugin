@@ -1,4 +1,4 @@
-package util;
+package util.time;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;

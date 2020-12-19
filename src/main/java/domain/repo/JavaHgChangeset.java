@@ -1,9 +1,9 @@
 package domain.repo;
 
 import com.aragost.javahg.DateTime;
-import util.FormattedDateTime;
-import util.MinZonedDateTime;
-import util.OldZonedDateTime;
+import util.time.FormattedDateTime;
+import util.time.MinZonedDateTime;
+import util.time.OldZonedDateTime;
 
 import java.time.ZonedDateTime;
 import java.util.Date;

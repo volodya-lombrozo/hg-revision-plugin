@@ -2,9 +2,9 @@ package domain.repo;
 
 import util.exceptions.ExecuteException;
 import util.OutputProperty;
-import util.FormattedDateTime;
+import util.time.FormattedDateTime;
 import util.HgChangesetString;
-import util.HgDateTime;
+import util.time.HgDateTime;
 import util.Parents;
 import util.exceptions.ParentSearchException;
 

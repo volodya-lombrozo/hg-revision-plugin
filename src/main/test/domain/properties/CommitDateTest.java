@@ -1,11 +1,10 @@
 package domain.properties;
 
-import domain.properties.CommitDate;
 import domain.repo.Changeset;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import util.FormattedDateTime;
+import util.time.FormattedDateTime;
 
 import java.util.Date;
 import java.util.Properties;

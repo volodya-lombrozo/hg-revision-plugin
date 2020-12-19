@@ -3,8 +3,8 @@ package domain.repo;
 import util.exceptions.ExecuteException;
 import org.junit.Test;
 import org.mockito.Mockito;
-import util.FormattedDateTime;
-import util.HgDateTime;
+import util.time.FormattedDateTime;
+import util.time.HgDateTime;
 import util.exceptions.ParentSearchException;
 
 import static org.junit.Assert.*;

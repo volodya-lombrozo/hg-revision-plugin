@@ -1,6 +1,7 @@
-package util;
+package util.time;
 
 import org.junit.Test;
+import util.time.FormattedDateTime;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
