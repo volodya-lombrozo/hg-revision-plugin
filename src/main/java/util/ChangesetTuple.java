@@ -20,7 +20,10 @@ public class ChangesetTuple {
     public Map<String, Changeset> toMap(Repository repo) {
         Pattern p = Pattern.compile("\\n[\\n]+");
         return Arrays.stream(rawListOfChangesets.split(p.pattern()))
-                .map(output -> new CommandLineChangeset(output, repo)).collect(Collectors.toMap(CommandLineChangeset::getNode, c -> c));
+                .map(output -> new CommandLineChangeset(output, repo)).collect(Collectors.toMap(this::key, c -> c));
     }
 
+    private String key(Changeset changeset) {
+        return changeset.getRevision() + ":" + changeset.getNode();
+    }
 }

@@ -67,14 +67,14 @@ public class CachedRepositoryTest {
 
     @Test
     public void findChangeset_load() throws ExecuteException {
-        String firstNode = "node:'first'";
-        String secondNode = "node:'second'";
+        String firstNode = "rev:'1'\nnode:'first'";
+        String secondNode = "rev:'2'\nnode:'second'";
         Command findAllChangesetsCommand = Mockito.mock(Command.class);
         when(findAllChangesetsCommand.execute()).thenReturn(firstNode + "\n\n" + secondNode);
         CachedRepository repo = new CachedRepository(delegate, findAllChangesetsCommand);
 
-        Changeset firstActual = repo.findChangeset("first");
-        Changeset secondActual = repo.findChangeset("second");
+        Changeset firstActual = repo.findChangeset("1:first");
+        Changeset secondActual = repo.findChangeset("2:second");
 
         CommandLineChangeset first = new CommandLineChangeset(firstNode);
         CommandLineChangeset second = new CommandLineChangeset(secondNode);

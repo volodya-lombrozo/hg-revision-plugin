@@ -47,7 +47,6 @@ public class ScanTest {
     public void commandLineFillPropertiesTest() throws ExecuteException {
         Properties properties = new Properties();
         RepositoryInfo info = new RepositoryInfo(new CachedRepository(new CommandLineRepository(path)));
-//        RepositoryInfo info = new RepositoryInfo(new CommandLineRepository(path));
 
         info.fillProperties(properties);
 
