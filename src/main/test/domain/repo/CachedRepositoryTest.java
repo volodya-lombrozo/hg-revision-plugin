@@ -84,13 +84,14 @@ public class CachedRepositoryTest {
 
     @Test
     public void currentChangeset_load() throws ExecuteException {
-        CommandLineChangeset changeset = new CommandLineChangeset("node:'one'");
+        CommandLineChangeset changeset = new CommandLineChangeset("node:'one'", Mockito.mock(Repository.class));
         when(delegate.currentChangeset()).thenReturn(changeset);
         CachedRepository repo = new CachedRepository(delegate);
+        CommandLineChangeset expected = new CommandLineChangeset(changeset, repo);
 
         Changeset actual = repo.currentChangeset();
 
-        assertEquals(changeset, actual);
+        assertEquals(expected, actual);
     }
 
     @Test

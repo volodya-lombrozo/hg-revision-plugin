@@ -62,7 +62,7 @@ public class CachedRepository implements Repository {
     @Override
     public synchronized Changeset currentChangeset() throws ExecuteException {
         if (currentChangeset.get() == null)
-            currentChangeset.set(delegate.currentChangeset());
+            currentChangeset.set(new CommandLineChangeset(delegate.currentChangeset(), this));
         return currentChangeset.get();
     }
 

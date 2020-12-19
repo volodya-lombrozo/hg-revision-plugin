@@ -52,7 +52,7 @@ public class ChangesetParentsTest {
 
         String actual = parents.toString();
 
-        assertEquals(left, actual);
+        assertEquals(left + " " + ChangesetParents.EMPTY_PARENT, actual);
     }
 
     @Test
@@ -62,7 +62,7 @@ public class ChangesetParentsTest {
 
         String actual = parents.toString();
 
-        assertEquals(right, actual);
+        assertEquals(ChangesetParents.EMPTY_PARENT + " " + right, actual);
     }
 
 
@@ -72,6 +72,6 @@ public class ChangesetParentsTest {
 
         String actual = parents.toString();
 
-        assertTrue(actual.isEmpty());
+        assertEquals(ChangesetParents.EMPTY_PARENT + " " + ChangesetParents.EMPTY_PARENT, actual);
     }
 }
