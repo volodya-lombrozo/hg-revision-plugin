@@ -1,4 +1,6 @@
 import domain.RepositoryInfo;
+import domain.repo.CachedRepository;
+import domain.repo.CommandLineRepository;
 import domain.repo.JavaHgRepository;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -24,7 +26,7 @@ public class HgMojo extends AbstractMojo {
         try {
             getLog().info("Hg project dir: " + baseDir);
             getLog().info("Start of scanning hg project");
-            RepositoryInfo info = new RepositoryInfo(new JavaHgRepository(baseDir));
+            RepositoryInfo info = new RepositoryInfo(new CachedRepository(new CommandLineRepository(baseDir)));
             getLog().info("Start of setting properties...");
             info.fillProperties(project.getProperties());
             getLog().info("Scanning is done successfully.");
