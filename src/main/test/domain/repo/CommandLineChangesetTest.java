@@ -29,7 +29,7 @@ public class CommandLineChangesetTest {
                         "message:" + "'" + message + "'\n" +
                         "node:" + "'" + node + "'\n" +
                         "tags:" + "'" + tags + "'\n" +
-                        "revision:" + "'" + revision + "'\n" +
+                        "rev:" + "'" + revision + "'\n" +
                         "parents:" + "'" + parents + "'\n"
         );
 

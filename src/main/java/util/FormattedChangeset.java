@@ -19,7 +19,7 @@ public class FormattedChangeset {
                 + "'\nmessage:'" + changeset.getMessage()
                 + "'\nnode:'" + changeset.getNode()
                 + "'\ntags:'" + String.join(" ", changeset.tags())
-                + "'\nrevision:'" + changeset.getRevision()
+                + "'\nrev:'" + changeset.getRevision()
                 + "'\nparents:'" + new ChangesetParents(changeset).toString() + "'";
     }
 }

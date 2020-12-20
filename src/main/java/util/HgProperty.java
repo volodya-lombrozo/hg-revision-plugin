@@ -20,7 +20,12 @@ public class HgProperty {
 
     public String property() {
         String[] strings = commandOutput.split(delimiter);
-        return Arrays.stream(strings).filter(s -> s.contains(key)).findFirst().map(this::value).orElse("");
+        return Arrays.stream(strings).filter(s -> filterKey(s, key)).findFirst().map(this::value).orElse("");
+    }
+
+    private boolean filterKey(String raw, String key) {
+        String keyFromRaw = raw.split(":")[0];
+        return key.equals(keyFromRaw);
     }
 
     private String value(String raw) {

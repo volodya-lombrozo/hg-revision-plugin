@@ -27,7 +27,7 @@ public class FormattedChangesetTest {
                 "message:" + "'" + message + "'\n" +
                 "node:" + "'" + node + "'\n" +
                 "tags:" + "'" + tags + "'\n" +
-                "revision:" + "'" + revision + "'\n" +
+                "rev:" + "'" + revision + "'\n" +
                 "parents:" + "'" + parents + "'";
         Repository repo = Mockito.mock(Repository.class);
         when(repo.findChangeset("4:370d3f31c2dd")).thenReturn(new CommandLineChangeset("rev:'4'\nnode:'370d3f31c2dd'"));

@@ -25,4 +25,16 @@ public class HgPropertyTest {
 
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void conflictedProperties() {
+        String rawInput = "branch:'update_delete_game'\n" +
+                "date:'1571136531 -10800'\n";
+
+        String branch = new HgProperty(rawInput, "branch").property();
+        String date = new HgProperty(rawInput, "date").property();
+
+        assertEquals("update_delete_game", branch);
+        assertEquals("1571136531 -10800", date);
+    }
 }
