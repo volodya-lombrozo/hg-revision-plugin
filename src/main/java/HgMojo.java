@@ -1,7 +1,6 @@
 import domain.RepositoryInfo;
 import domain.repo.CachedRepository;
 import domain.repo.CommandLineRepository;
-import domain.repo.JavaHgRepository;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;

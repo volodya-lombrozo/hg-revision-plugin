@@ -15,16 +15,6 @@ public class ScanTest {
     private static final String path = "D:\\workspace\\hg_repo";
     private static final Logger logger = Logger.getLogger(ScanTest.class.getName());
 
-    @Test
-    public void javaHgFillProperties() throws ExecuteException {
-        Properties properties = new Properties();
-        RepositoryInfo info = new RepositoryInfo(new JavaHgRepository(path));
-
-        info.fillProperties(properties);
-
-        logger.info(properties.toString());
-        assertFalse(properties.isEmpty());
-    }
 
     @Test
     public void commandLineRepoLoadParentsTest() throws ExecuteException {
@@ -52,20 +42,6 @@ public class ScanTest {
 
         logger.info(properties.toString());
         assertFalse(properties.isEmpty());
-    }
-
-
-    @Test
-    public void compareTwoImplementations() throws ExecuteException {
-        Repository javaHg = new JavaHgRepository(path);
-        Repository commandLine = new CommandLineRepository(path);
-        Properties javaHgProps = new Properties();
-        Properties commandLineProps = new Properties();
-
-        new RepositoryInfo(javaHg).fillProperties(javaHgProps);
-        new RepositoryInfo(commandLine).fillProperties(commandLineProps);
-
-        assertEquals(javaHgProps, commandLineProps);
     }
 
 
