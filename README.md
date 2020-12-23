@@ -1,4 +1,4 @@
-# How to use hg-revision plugin
+# How to use hg-revision plugin [![codecov](https://codecov.io/gh/volodya-lombrozo/hg-revision-plugin/branch/master/graph/badge.svg?token=NUTEPU7WFI)](https://codecov.io/gh/volodya-lombrozo/hg-revision-plugin)
 1. Add plugin to pom.xml (to plugins section)
 
             <plugin>
