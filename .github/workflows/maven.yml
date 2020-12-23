@@ -28,3 +28,7 @@ jobs:
         restore-keys: ${{ runner.os }}-m2
     - name: Run tests with Maven
       run: mvn -B test --file pom.xml
+    - name: Upload code coverage to codecov
+      run: bash <(curl -s https://codecov.io/bash) # Upload to Codecov
+
+ 
