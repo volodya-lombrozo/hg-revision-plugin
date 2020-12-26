@@ -69,7 +69,7 @@ public class PreviousTags implements RecordableProperty {
     }
 
 
-    private static class TimedTags {
+    static class TimedTags {
 
         private final int step;
         private final ZonedDateTime time;

@@ -90,4 +90,27 @@ public class PreviousTagsTest {
         assertNotNull(actual);
         assertFalse(actual.isEmpty());
     }
+
+
+    @Test
+    public void timedTagTestLatest_secondLater() {
+        ZonedDateTime now = ZonedDateTime.now();
+        PreviousTags.TimedTags first = new PreviousTags.TimedTags(1, now, Arrays.asList("a", "b"));
+        PreviousTags.TimedTags second = new PreviousTags.TimedTags(2, now.plusSeconds(1), Arrays.asList("c", "d"));
+
+        PreviousTags.TimedTags later = PreviousTags.TimedTags.later(first, second);
+
+        assertEquals(later, second);
+    }
+
+    @Test
+    public void timedTagTestLatest_firstLater() {
+        ZonedDateTime now = ZonedDateTime.now();
+        PreviousTags.TimedTags first = new PreviousTags.TimedTags(1, now.plusSeconds(1), Arrays.asList("a", "b"));
+        PreviousTags.TimedTags second = new PreviousTags.TimedTags(2, now, Arrays.asList("c", "d"));
+
+        PreviousTags.TimedTags later = PreviousTags.TimedTags.later(first, second);
+
+        assertEquals(later, first);
+    }
 }
