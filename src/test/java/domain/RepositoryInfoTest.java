@@ -1,11 +1,11 @@
 package domain;
 
-import util.exceptions.ExecuteException;
 import domain.repo.Changeset;
 import domain.repo.Repository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import util.exceptions.ExecuteException;
 import util.time.FormattedTime;
 
 import java.time.ZonedDateTime;
@@ -62,5 +62,17 @@ public class RepositoryInfoTest {
         String actual = info.toString();
 
         assertNotNull(actual);
+    }
+
+
+    @Test(expected = RuntimeException.class)
+    public void toStringTestFailDuringExecution() throws ExecuteException {
+        Repository repo = Mockito.mock(Repository.class);
+        when(repo.currentChangeset()).thenThrow(new ExecuteException("Some message"));
+        RepositoryInfo info = new RepositoryInfo(repo);
+
+        String res = info.toString();
+
+        fail(res);
     }
 }
