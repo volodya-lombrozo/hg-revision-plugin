@@ -1,4 +1,7 @@
-# How to use hg-revision plugin [![codecov](https://codecov.io/gh/volodya-lombrozo/hg-revision-plugin/branch/master/graph/badge.svg)](https://codecov.io/gh/volodya-lombrozo/hg-revision-plugin)
+# How to use hg-revision plugin 
+[![codecov](https://codecov.io/gh/volodya-lombrozo/hg-revision-plugin/branch/master/graph/badge.svg)](https://codecov.io/gh/volodya-lombrozo/hg-revision-plugin)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/volodya-lombrozo/hg-revision-plugin.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/volodya-lombrozo/hg-revision-plugin/alerts/)
+[![Language grade: Java](https://img.shields.io/lgtm/grade/java/g/volodya-lombrozo/hg-revision-plugin.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/volodya-lombrozo/hg-revision-plugin/context:java)
 1. Add plugin to pom.xml (to plugins section)
 
             <plugin>
