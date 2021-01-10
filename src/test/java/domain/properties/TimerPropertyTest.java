@@ -7,6 +7,7 @@ import org.mockito.Mockito;
 import java.util.Properties;
 import java.util.logging.Logger;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.times;
@@ -32,5 +33,14 @@ public class TimerPropertyTest {
         TimerProperty property = new TimerProperty(delegate);
 
         assertTrue(property.loggerIsDefined());
+    }
+
+    @Test
+    public void nullLoggerTest() {
+        RecordableProperty delegate = new RecordableProperty.Fake();
+
+        TimerProperty property = new TimerProperty(delegate, null);
+
+        assertFalse(property.loggerIsDefined());
     }
 }
