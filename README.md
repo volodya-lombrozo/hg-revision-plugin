@@ -11,7 +11,7 @@ The analysis uses the current state of the repository.
             <plugin>
                 <groupId>com.github.volodya-lombrozo</groupId>
                 <artifactId>hg-revision-plugin</artifactId>
-                <version>0.10</version>
+                <version>0.11</version>
                 <executions>
                     <execution>
                         <phase>
