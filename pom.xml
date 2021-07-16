@@ -111,6 +111,23 @@
             <build>
                 <plugins>
                     <plugin>
+                        <groupId>com.github.volodya-lombrozo</groupId>
+                        <artifactId>conventional-commit-linter</artifactId>
+                        <version>0.0.5</version>
+                        <configuration>
+                            <scan>LAST</scan>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>
+                                        scan
+                                    </goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
                         <groupId>org.jacoco</groupId>
                         <artifactId>jacoco-maven-plugin</artifactId>
                         <version>0.8.6</version>
