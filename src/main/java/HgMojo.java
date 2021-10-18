@@ -7,6 +7,8 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
+import util.log.Log;
+import util.log.MavenLog;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -23,19 +25,21 @@ public class HgMojo extends AbstractMojo {
 
     private RepositoryInfoFactory factory = path -> new RepositoryInfo(new CachedRepository(new CommandLineRepository(path)));
 
+    private final Log log = new MavenLog(getLog());
+
     public void execute() throws MojoExecutionException {
         try {
-            getLog().info("Hg project dir: " + baseDir);
-            getLog().info("Start of scanning hg project");
+            log.info("Hg project dir: " + baseDir);
+            log.info("Start of scanning hg project");
             RepositoryInfo info = factory.repositoryInfo(baseDir);
-            getLog().info("Start of setting properties...");
+            log.info("Start of setting properties...");
             info.fillProperties(project.getProperties());
-            getLog().info("Scanning is done successfully.");
+            log.info("Scanning is done successfully.");
         } catch (Exception e) {
             StringWriter sw = new StringWriter();
             PrintWriter pw = new PrintWriter(sw);
             e.printStackTrace(pw);
-            throw new MojoExecutionException(e.getMessage() + " " + sw.toString(), e);
+            throw new MojoExecutionException(e.getMessage() + " " + sw, e);
         }
     }
 
