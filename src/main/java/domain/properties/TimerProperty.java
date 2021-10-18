@@ -1,20 +1,20 @@
 package domain.properties;
 
-import util.DefaultLogger;
+import util.log.JavaLogger;
+import util.log.Log;
 
 import java.util.Properties;
-import java.util.logging.Logger;
 
 public class TimerProperty implements RecordableProperty {
 
     private final RecordableProperty property;
-    private final Logger logger;
+    private final Log logger;
 
     public TimerProperty(RecordableProperty property) {
-        this(property, new DefaultLogger().toLogger());
+        this(property, new JavaLogger());
     }
 
-    public TimerProperty(RecordableProperty property, Logger logger) {
+    public TimerProperty(RecordableProperty property, Log logger) {
         this.property = property;
         this.logger = logger;
     }

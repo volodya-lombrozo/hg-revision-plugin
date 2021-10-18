@@ -1,35 +1,35 @@
 package domain.properties;
 
 
-import util.DefaultLogger;
+import util.log.JavaLogger;
+import util.log.Log;
 
 import java.util.Properties;
-import java.util.logging.Logger;
 
 public class Loggable implements RecordableProperty {
-    private final Logger logger;
+    private final Log log;
     private final RecordableProperty delegate;
 
     public Loggable(RecordableProperty property) {
-        this(property, new DefaultLogger().toLogger());
+        this(property, new JavaLogger());
     }
 
-    public Loggable(RecordableProperty delegate, Logger logger) {
+    public Loggable(RecordableProperty delegate, Log logger) {
         this.delegate = delegate;
-        this.logger = logger;
+        this.log = logger;
     }
 
     @Override
     public void fillProperties(Properties properties) {
-        logger.info("Search property " + delegate.getClass().getSimpleName());
+        log.info("Search property " + delegate.getClass().getSimpleName());
         delegate.fillProperties(properties);
     }
 
     public boolean loggerIsNotEmpty() {
-        return logger != null;
+        return log != null;
     }
 
     public String loggerName() {
-        return logger.getName();
+        return log.name();
     }
 }

@@ -1,14 +1,12 @@
 package domain.properties;
 
 
-import domain.properties.Loggable;
-import domain.properties.RecordableProperty;
 import org.junit.Test;
 import org.mockito.Mockito;
-import util.DefaultLogger;
+import util.log.JavaLogger;
+import util.log.Log;
 
 import java.util.Properties;
-import java.util.logging.Logger;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -20,7 +18,7 @@ public class LoggableTest {
 
     @Test
     public void logTest() {
-        Logger mockLogger = Mockito.mock(Logger.class);
+        Log mockLogger = Mockito.mock(Log.class);
         RecordableProperty.Fake property = new RecordableProperty.Fake();
         String expectedMessage = "Search property " + property.getClass().getSimpleName();
         Loggable loggable = new Loggable(property, mockLogger);
@@ -38,7 +36,7 @@ public class LoggableTest {
         loggable.fillProperties(new Properties());
 
         assertTrue(loggable.loggerIsNotEmpty());
-        String expectedLoggerName = new DefaultLogger().toLogger().getName();
+        String expectedLoggerName = new JavaLogger().name();
         assertEquals(expectedLoggerName, loggable.loggerName());
     }
 

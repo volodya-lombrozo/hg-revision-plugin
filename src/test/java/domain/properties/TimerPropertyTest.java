@@ -3,9 +3,9 @@ package domain.properties;
 
 import org.junit.Test;
 import org.mockito.Mockito;
+import util.log.Log;
 
 import java.util.Properties;
-import java.util.logging.Logger;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -18,7 +18,7 @@ public class TimerPropertyTest {
     @Test
     public void fillPropertyAndCalculateExecutionTime() {
         RecordableProperty delegate = new RecordableProperty.Fake();
-        Logger logger = Mockito.mock(Logger.class);
+        Log logger = Mockito.mock(Log.class);
         TimerProperty property = new TimerProperty(delegate, logger);
 
         property.fillProperties(new Properties());
