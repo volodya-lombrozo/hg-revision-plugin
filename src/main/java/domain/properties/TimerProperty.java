@@ -1,6 +1,6 @@
 package domain.properties;
 
-import util.log.JavaLogger;
+import util.log.JavaLog;
 import util.log.Log;
 
 import java.util.Properties;
@@ -11,7 +11,7 @@ public class TimerProperty implements RecordableProperty {
     private final Log logger;
 
     public TimerProperty(RecordableProperty property) {
-        this(property, new JavaLogger());
+        this(property, new JavaLog());
     }
 
     public TimerProperty(RecordableProperty property, Log logger) {

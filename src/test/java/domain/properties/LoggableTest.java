@@ -3,7 +3,7 @@ package domain.properties;
 
 import org.junit.Test;
 import org.mockito.Mockito;
-import util.log.JavaLogger;
+import util.log.JavaLog;
 import util.log.Log;
 
 import java.util.Properties;
@@ -36,7 +36,7 @@ public class LoggableTest {
         loggable.fillProperties(new Properties());
 
         assertTrue(loggable.loggerIsNotEmpty());
-        String expectedLoggerName = new JavaLogger().name();
+        String expectedLoggerName = new JavaLog().name();
         assertEquals(expectedLoggerName, loggable.loggerName());
     }
 

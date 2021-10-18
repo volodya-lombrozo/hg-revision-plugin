@@ -1,16 +1,16 @@
 package util;
 
 import org.junit.Test;
-import util.log.JavaLogger;
+import util.log.JavaLog;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-public class JavaLoggerTest {
+public class JavaLogTest {
 
     @Test
     public void defaultConstructor() {
-        JavaLogger javaLogger = new JavaLogger();
-        assertEquals("hg-revision-plugin", javaLogger.name());
+        JavaLog javaLog = new JavaLog();
+        assertEquals("hg-revision-plugin", javaLog.name());
     }
 }

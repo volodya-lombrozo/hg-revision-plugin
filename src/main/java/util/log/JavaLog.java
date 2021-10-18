@@ -2,15 +2,15 @@ package util.log;
 
 import java.util.logging.Logger;
 
-public class JavaLogger implements Log {
+public class JavaLog implements Log {
 
     private final Logger logger;
 
-    public JavaLogger() {
+    public JavaLog() {
         this(Logger.getLogger("hg-revision-plugin"));
     }
 
-    public JavaLogger(Logger logger) {
+    public JavaLog(final Logger logger) {
         this.logger = logger;
     }
 
