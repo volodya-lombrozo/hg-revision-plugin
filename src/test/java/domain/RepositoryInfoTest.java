@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import util.exceptions.ExecuteException;
+import util.log.JavaLog;
 import util.time.FormattedTime;
 
 import java.time.ZonedDateTime;
@@ -75,4 +76,5 @@ public class RepositoryInfoTest {
 
         fail(res);
     }
+
 }

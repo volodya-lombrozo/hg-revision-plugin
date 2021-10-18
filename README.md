@@ -30,6 +30,29 @@ the current state of the repository.
 </plugin>
 ```
 
+Configuration with enabled logging:
+```XML
+
+<plugin>
+    <groupId>com.github.volodya-lombrozo</groupId>
+    <artifactId>hg-revision-plugin</artifactId>
+    <version>0.11</version>
+    <configuration>
+        <log>true</log>
+    </configuration>
+    <executions>
+        <execution>
+            <phase>
+                validate
+            </phase>
+            <goals>
+                <goal>scan</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
+```
+
 2. Then, after validate phase you can use next maven properties:
 
     * hg.author - _current commit author_

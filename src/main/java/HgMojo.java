@@ -1,12 +1,11 @@
 import domain.RepositoryInfo;
 import domain.RepositoryInfoFactory;
-import domain.repo.CachedRepository;
-import domain.repo.CommandLineRepository;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
+import util.log.EnabledLog;
 import util.log.Log;
 import util.log.MavenLog;
 
@@ -23,9 +22,12 @@ public class HgMojo extends AbstractMojo {
     @Parameter(defaultValue = "${project}")
     private MavenProject project;
 
-    private RepositoryInfoFactory factory = RepositoryInfo::new;
+    @Parameter(property = "log", defaultValue = "false")
+    private boolean isLogged = false;
 
-    private final Log log = new MavenLog(getLog());
+    Log log = new EnabledLog(new MavenLog(getLog()), isLogged);
+
+    private RepositoryInfoFactory factory = path -> new RepositoryInfo(path, log);
 
     public void execute() throws MojoExecutionException {
         try {
@@ -57,5 +59,13 @@ public class HgMojo extends AbstractMojo {
 
     public void setProject(MavenProject project) {
         this.project = project;
+    }
+
+    public boolean isLogged() {
+        return isLogged;
+    }
+
+    public void setLogged(final boolean logged) {
+        this.isLogged = logged;
     }
 }

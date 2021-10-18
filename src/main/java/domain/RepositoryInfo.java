@@ -6,6 +6,8 @@ import domain.repo.CommandLineRepository;
 import util.exceptions.ExecuteException;
 import domain.repo.Changeset;
 import domain.repo.Repository;
+import util.log.JavaLog;
+import util.log.Log;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,13 +19,19 @@ import java.util.stream.Collectors;
 public class RepositoryInfo {
 
     private final Repository repository;
+    private final Log log;
 
-    public RepositoryInfo(String path) {
-        this(new CachedRepository(new CommandLineRepository(path)));
+    public RepositoryInfo(String path, Log log) {
+        this(new CachedRepository(new CommandLineRepository(path)), log);
     }
 
     public RepositoryInfo(Repository repository) {
-        this.repository = repository;
+        this(repository, new JavaLog());
+    }
+
+    public RepositoryInfo(Repository repo, Log log) {
+        this.repository = repo;
+        this.log = log;
     }
 
     public void fillProperties(Properties properties) throws ExecuteException {
@@ -54,7 +62,9 @@ public class RepositoryInfo {
     }
 
     private List<RecordableProperty> asLoggableProperties(RecordableProperty... properties) {
-        return Arrays.stream(properties).map(Loggable::new).collect(Collectors.toList());
+        return Arrays.stream(properties)
+                .map(prop -> new Loggable(prop, log))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -63,7 +73,7 @@ public class RepositoryInfo {
             StringBuilder sb = new StringBuilder();
             allRepoProperties().forEach(item -> sb.append(item.getClass().getName())
                     .append(":")
-                    .append(item.toString())
+                    .append(item)
                     .append("\n"));
             return sb.toString();
         } catch (ExecuteException e) {
