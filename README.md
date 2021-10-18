@@ -17,7 +17,7 @@ To use the plugin, add the following configuration to your `pom.xml` file
 <plugin>
     <groupId>com.github.volodya-lombrozo</groupId>
     <artifactId>hg-revision-plugin</artifactId>
-    <version>0.11</version>
+    <version>0.12</version>
     <executions>
         <execution>
             <phase>
