@@ -1,6 +1,8 @@
 package domain;
 
 import domain.properties.*;
+import domain.repo.CachedRepository;
+import domain.repo.CommandLineRepository;
 import util.exceptions.ExecuteException;
 import domain.repo.Changeset;
 import domain.repo.Repository;
@@ -15,6 +17,10 @@ import java.util.stream.Collectors;
 public class RepositoryInfo {
 
     private final Repository repository;
+
+    public RepositoryInfo(String path) {
+        this(new CachedRepository(new CommandLineRepository(path)));
+    }
 
     public RepositoryInfo(Repository repository) {
         this.repository = repository;

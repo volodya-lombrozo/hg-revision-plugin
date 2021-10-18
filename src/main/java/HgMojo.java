@@ -23,7 +23,7 @@ public class HgMojo extends AbstractMojo {
     @Parameter(defaultValue = "${project}")
     private MavenProject project;
 
-    private RepositoryInfoFactory factory = path -> new RepositoryInfo(new CachedRepository(new CommandLineRepository(path)));
+    private RepositoryInfoFactory factory = RepositoryInfo::new;
 
     private final Log log = new MavenLog(getLog());
 
