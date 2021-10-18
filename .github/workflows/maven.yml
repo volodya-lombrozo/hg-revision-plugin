@@ -31,7 +31,7 @@ jobs:
             ${{ runner.os }}-maven-
 
       - name: Run tests with Maven
-        run: mvn -B test -P codecov --file pom.xml\
+        run: mvn -B test -P quality --file pom.xml\
       - name: Upload to Codecov
         uses: codecov/codecov-action@v1.1.0
         with:

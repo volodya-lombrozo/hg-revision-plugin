@@ -104,7 +104,7 @@
             </activation>
         </profile>
         <profile>
-            <id>codecov</id>
+            <id>quality</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
