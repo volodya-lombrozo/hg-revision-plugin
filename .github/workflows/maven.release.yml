@@ -1,13 +1,13 @@
 # This workflow will build a Java project with Maven
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 
-name: Java CI with Maven
+name: Release plugin to Maven Central
 
 on:
   push:
-    branches: [ master ]
+    branches: [ release ]
   pull_request:
-    branches: [ master ]
+    branches: [ release ]
 
 jobs:
   build:
@@ -16,11 +16,16 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Setup Zulu OpenJDK 11
+      - name: Setup Zulu OpenJDK 8
         uses: actions/setup-java@v2
         with:
           distribution: 'zulu'
           java-version: 11
+          server-id: com.github.volodya-lombrozo
+          server-username: MAVEN_USERNAME
+          server-password: MAVEN_PASSWORD
+          gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
+          gpg-passphrase: MAVEN_GPG_PASSPHRASE
 
       - name: Cache local Maven repository
         uses: actions/cache@v2
@@ -30,14 +35,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      - name: Run tests with Maven
-        run: mvn -B test -P quality --file pom.xml\
-      - name: Upload to Codecov
-        uses: codecov/codecov-action@v1.1.0
-        with:
-          file: ./target/site/jacoco/jacoco.xml
-          flags: unittests
-
-      
-
- 
+      - name: Deploy to Maven Central
+        run: mvn -B deploy -P release --file pom.xml\
+        env:
+          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
