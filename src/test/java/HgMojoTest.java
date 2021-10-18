@@ -60,7 +60,7 @@ public class HgMojoTest {
 
     @Test
     public void logging() {
-        hgMojo.setLogged(true);
-        assertTrue(hgMojo.isLogged());
+        hgMojo.setQuiet(true);
+        assertTrue(hgMojo.isQuiet());
     }
 }

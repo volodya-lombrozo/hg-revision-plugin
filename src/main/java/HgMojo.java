@@ -22,11 +22,10 @@ public class HgMojo extends AbstractMojo {
     @Parameter(defaultValue = "${project}")
     private MavenProject project;
 
-    @Parameter(property = "log", defaultValue = "false")
-    private boolean isLogged = false;
+    @Parameter(name = "quiet", defaultValue = "true")
+    private boolean quiet = true;
 
-    Log log = new EnabledLog(new MavenLog(getLog()), isLogged);
-
+    private Log log = new EnabledLog(new MavenLog(getLog()), !quiet);
     private RepositoryInfoFactory factory = path -> new RepositoryInfo(path, log);
 
     public void execute() throws MojoExecutionException {
@@ -61,11 +60,12 @@ public class HgMojo extends AbstractMojo {
         this.project = project;
     }
 
-    public boolean isLogged() {
-        return isLogged;
+    public boolean isQuiet() {
+        return quiet;
     }
 
-    public void setLogged(final boolean logged) {
-        this.isLogged = logged;
+    public void setQuiet(final boolean quiet) {
+        this.quiet = quiet;
+        this.log = new EnabledLog(new MavenLog(getLog()), !quiet);
     }
 }
