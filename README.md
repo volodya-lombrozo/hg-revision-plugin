@@ -13,7 +13,6 @@ To use the plugin, add the following configuration to your `pom.xml` file
  (to the plugins section).
 
 ```XML
-
 <plugin>
     <groupId>com.github.volodya-lombrozo</groupId>
     <artifactId>hg-revision-plugin</artifactId>
@@ -30,12 +29,10 @@ To use the plugin, add the following configuration to your `pom.xml` file
     </executions>
 </plugin>
 ```
-##Propeties
 
+## Properties
 Then, after `validate` phase you will be able to use the
 next maven properties:
-
-
 * hg.author - _current commit author_
 * hg.branch - _current branch name_
 * hg.date - _time of current commit_
@@ -53,7 +50,6 @@ next maven properties:
 * hg.commit.number.from.previous.tag - _commit number from previous tag_
 
 ## Logging
-
 By default, the plugin works in `quiet` mode without logging. In order to enable logging just add the
 next `configuration` to `execution` section.
 
@@ -66,5 +62,5 @@ next `configuration` to `execution` section.
 </configuration>
 ```
 
-##Example
+## Example
 [Example project](https://github.com/volodya-lombrozo/hg-revision-plugin-example)
