@@ -1,5 +1,5 @@
 architect:
-  - lombrozo
+  - volodya-lombrozo
 merge:
   script: mvn clean test -P quality --file pom.xml --errors --batch-mode
 release:
