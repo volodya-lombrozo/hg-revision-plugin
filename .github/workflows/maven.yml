@@ -33,7 +33,7 @@ jobs:
       - name: Run tests with Maven
         run: mvn -B test -P quality --file pom.xml\
       - name: Upload to Codecov
-        uses: codecov/codecov-action@v5.5.0
+        uses: codecov/codecov-action@v5.5.1
         with:
           file: ./target/site/jacoco/jacoco.xml
           flags: unittests
